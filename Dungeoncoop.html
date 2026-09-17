@@ -48,6 +48,7 @@
     height:100%;width:100%;
     transition:width .15s ease-out;
     position:relative;
+    background:linear-gradient(#2e9e4a,#1e7a30)!important;
 }
 .hpBarInner::after{
     content:"";position:absolute;top:0;left:0;right:0;height:40%;
@@ -119,6 +120,8 @@
 .pip-poison{background:#6fdc5c;}
 .pip-slow{background:#5cd9ff;}
 .pip-bless{background:#ffd34e;}
+.pip-haste{background:#5cd9ff;animation:hastePulse .5s infinite;}
+@keyframes hastePulse{0%,100%{opacity:1;}50%{opacity:.5;}}
 .pip-counter{background:#ffd34e;animation:counterPulse .5s infinite;}
 @keyframes counterPulse{0%,100%{opacity:1;}50%{opacity:.5;}}
 .downOverlay{
@@ -136,8 +139,6 @@
     animation:reviveSpin 1s linear infinite;
 }
 @keyframes reviveSpin{to{transform:rotate(360deg);}}
-
-/* Responsive HUD scaling */
 @media(max-width:800px){
     .playerPortrait{width:42px;height:42px;font-size:20px;}
     .playerStats{min-width:120px;}
@@ -281,109 +282,26 @@ canvas{display:block;width:100vw;height:100vh;}
 #bossBar.vulnerable .bossPhase{color:#ffd34e;animation:bossBarPulse 0.7s ease-in-out infinite;}
 @keyframes bossBarPulse{0%,100%{opacity:0.7;}50%{opacity:1;text-shadow:2px 2px 0 #050408,0 0 10px #ffd34e;}}
 .eliteBadge{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;font-size:56px;font-weight:900;letter-spacing:6px;color:#ff4d69;text-shadow:0 0 0 #08070b,4px 4px 0 #08070b,8px 8px 0 #8a1020;pointer-events:none;animation:roomClearPop .6s ease;}
-/* ===== BOSS UPGRADE UI ===== */
-.bossPanel{
-    width:min(950px,94%);
-    background:linear-gradient(#2a1a30,#150a1a);
-    border-color:#8a5cff;
-    box-shadow:0 0 0 4px #08070b,10px 10px 0 #050408,inset 0 0 0 2px #b07cff,0 0 60px #8a5cff44;
-}
-.bossTitle{
-    color:#ffd34e !important;
-    font-size:38px !important;
-    letter-spacing:6px !important;
-    text-shadow:0 0 0 #08070b,4px 4px 0 #08070b,0 0 30px #ffd34e !important;
-    animation:bossTitlePulse 2s ease-in-out infinite;
-}
-@keyframes bossTitlePulse{
-    0%,100%{ text-shadow:0 0 0 #08070b,4px 4px 0 #08070b,0 0 30px #ffd34e; }
-    50%{ text-shadow:0 0 0 #08070b,4px 4px 0 #08070b,0 0 50px #ffd34e; }
-}
-.bossSubtitle{
-    color:#d0b8ff !important;
-    font-size:12px !important;
-    letter-spacing:3px !important;
-    margin-bottom:28px !important;
-}
-.bossUpgradeGrid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    margin:20px 0;
-}
-.bossUpgradeCard{
-    min-height:230px;
-    padding:22px 16px;
-    background:linear-gradient(#1a0e24,#0e0818);
-    border:3px solid #5a3a7a;
-    box-shadow:5px 5px 0 #050408,inset 0 0 0 2px #3a2050;
-    cursor:pointer;
-    transition:.15s;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    text-align:center;
-}
-.bossUpgradeCard:hover{
-    transform:translateY(-6px);
-    border-color:#b07cff;
-    box-shadow:5px 5px 0 #050408,inset 0 0 0 2px #8a5cff,0 0 30px #8a5cff66;
-}
-.bossUpgradeIcon{
-    font-size:42px;
-    margin-bottom:12px;
-    filter:drop-shadow(0 0 8px #ffd34e88);
-}
-.bossUpgradeName{
-    font-size:14px;
-    font-weight:900;
-    letter-spacing:2px;
-    margin-bottom:6px;
-    color:#f0e8d0;
-}
-.bossUpgradeRarity{
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:2px;
-    margin-bottom:12px;
-    padding:2px 8px;
-    border:2px solid #08070b;
-    background:#444;
-    color:#fff;
-}
-.bossUpgradeRarity.rarity-common{ background:#5a5a5a; }
-.bossUpgradeRarity.rarity-rare{ background:#2a6fb0; }
-.bossUpgradeRarity.rarity-epic{ background:#8a3ac8; box-shadow:0 0 8px #8a3ac8; }
-.bossUpgradeRarity.rarity-legendary{
-    background:linear-gradient(90deg,#ff6020,#ffd34e,#ff6020);
-    color:#1a0810;
-    animation:legendaryShine 2s linear infinite;
-}
-@keyframes legendaryShine{
-    0%{ filter:hue-rotate(0deg); }
-    100%{ filter:hue-rotate(360deg); }
-}
-.bossUpgradeDesc{
-    font-size:11px;
-    line-height:1.6;
-    color:#c8b8d8;
-    flex:1;
-    padding:0 4px;
-}
-.bossUpgradeTarget{
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:#ffd34e;
-    margin-top:12px;
-    padding:3px 8px;
-    border:2px solid #08070b;
-    background:#2a1a30;
-}
+.bossPanel{width:min(950px,94%);background:linear-gradient(#2a1a30,#150a1a);border-color:#8a5cff;box-shadow:0 0 0 4px #08070b,10px 10px 0 #050408,inset 0 0 0 2px #b07cff,0 0 60px #8a5cff44;}
+.bossTitle{color:#ffd34e !important;font-size:38px !important;letter-spacing:6px !important;text-shadow:0 0 0 #08070b,4px 4px 0 #08070b,0 0 30px #ffd34e !important;animation:bossTitlePulse 2s ease-in-out infinite;}
+@keyframes bossTitlePulse{0%,100%{text-shadow:0 0 0 #08070b,4px 4px 0 #08070b,0 0 30px #ffd34e;}50%{text-shadow:0 0 0 #08070b,4px 4px 0 #08070b,0 0 50px #ffd34e;}}
+.bossSubtitle{color:#d0b8ff !important;font-size:12px !important;letter-spacing:3px !important;margin-bottom:28px !important;}
+.bossUpgradeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0;}
+.bossUpgradeCard{min-height:230px;padding:22px 16px;background:linear-gradient(#1a0e24,#0e0818);border:3px solid #5a3a7a;box-shadow:5px 5px 0 #050408,inset 0 0 0 2px #3a2050;cursor:pointer;transition:.15s;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;}
+.bossUpgradeCard:hover{transform:translateY(-6px);border-color:#b07cff;box-shadow:5px 5px 0 #050408,inset 0 0 0 2px #8a5cff,0 0 30px #8a5cff66;}
+.bossUpgradeIcon{font-size:42px;margin-bottom:12px;filter:drop-shadow(0 0 8px #ffd34e88);}
+.bossUpgradeName{font-size:14px;font-weight:900;letter-spacing:2px;margin-bottom:6px;color:#f0e8d0;}
+.bossUpgradeRarity{font-size:9px;font-weight:900;letter-spacing:2px;margin-bottom:12px;padding:2px 8px;border:2px solid #08070b;background:#444;color:#fff;}
+.bossUpgradeRarity.rarity-common{background:#5a5a5a;}
+.bossUpgradeRarity.rarity-rare{background:#2a6fb0;}
+.bossUpgradeRarity.rarity-epic{background:#8a3ac8;box-shadow:0 0 8px #8a3ac8;}
+.bossUpgradeRarity.rarity-legendary{background:linear-gradient(90deg,#ff6020,#ffd34e,#ff6020);color:#1a0810;animation:legendaryShine 2s linear infinite;}
+@keyframes legendaryShine{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+.bossUpgradeDesc{font-size:11px;line-height:1.6;color:#c8b8d8;flex:1;padding:0 4px;}
+.bossUpgradeTarget{font-size:9px;font-weight:900;letter-spacing:2px;color:#ffd34e;margin-top:12px;padding:3px 8px;border:2px solid #08070b;background:#2a1a30;}
 @media(max-width:800px){
-    .bossUpgradeGrid{ grid-template-columns:1fr; }
-    .bossTitle{ font-size:24px !important; letter-spacing:3px !important; }
+    .bossUpgradeGrid{grid-template-columns:1fr;}
+    .bossTitle{font-size:24px !important;letter-spacing:3px !important;}
 }
 </style>
 </head>
@@ -399,7 +317,7 @@ canvas{display:block;width:100vw;height:100vh;}
         <div class="menuHint">PRESS PLAY TO BEGIN</div>
     </div>
     <div class="menuStats" id="menuStats"></div>
-    <div class="menuVersion">v1.1</div>
+    <div class="menuVersion">v1.2</div>
 </div>
 
 <div id="difficultyScreen" class="overlay hidden">
@@ -455,7 +373,7 @@ canvas{display:block;width:100vw;height:100vh;}
         <div class="playerStats">
             <div class="playerName" id="p1Name">P1 · HEALER</div>
             <div class="hpBarOuter">
-                <div class="hpBarInner" id="p1HpBar" style="background:linear-gradient(#2e9e4a,#1e7a30);"></div>
+                <div class="hpBarInner" id="p1HpBar"></div>
                 <div class="hpText" id="p1HpText">95/95</div>
             </div>
             <div class="shieldBarOuter" id="p1ShieldOuter" style="display:none;">
@@ -486,7 +404,7 @@ canvas{display:block;width:100vw;height:100vh;}
         <div class="playerStats">
             <div class="playerName" id="p2Name">P2 · KNIGHT</div>
             <div class="hpBarOuter">
-                <div class="hpBarInner" id="p2HpBar" style="background:linear-gradient(#d7354e,#a02030);"></div>
+                <div class="hpBarInner" id="p2HpBar"></div>
                 <div class="hpText" id="p2HpText">145/145</div>
             </div>
             <div class="shieldBarOuter" id="p2ShieldOuter" style="display:none;">
@@ -641,6 +559,7 @@ canvas{display:block;width:100vw;height:100vh;}
 </div>
 
 <script>
+
 // =========================================================
 //  SOUND ENGINE
 // =========================================================
@@ -727,6 +646,16 @@ const Sound = (() => {
             noiseGain.gain.setValueAtTime(0.28, now); noiseGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
             noiseSrc.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(sfxGain);
             noiseSrc.start(now); noiseSrc.stop(now + duration);
+        },
+        fireBlast: () => {
+            sweep(200, 800, 0.3, "sawtooth", 0.25);
+            noise(0.3, 0.2, 1500);
+            tone(80, 0.4, "square", 0.2, null, 0.1);
+        },
+        hasteCast: () => {
+            tone(660, 0.1, "sine", 0.25);
+            tone(880, 0.1, "sine", 0.2, null, 0.05);
+            tone(1100, 0.15, "sine", 0.2, null, 0.1);
         },
         healCast: () => { tone(880, 0.15, "sine", 0.25); tone(1108, 0.15, "sine", 0.2, null, 0.08); tone(1320, 0.2, "sine", 0.15, null, 0.16); },
         holyShoot: () => { sweep(600, 1200, 0.15, "sine", 0.2); },
@@ -1097,32 +1026,39 @@ function drawBruteAt(x, y, scale){
     mctx.fillStyle="#6e322d"; mctx.fillRect(-27,18,15,10); mctx.fillRect(12,18,15,10);
     mctx.restore();
 }
-function drawHealerAt(x, y, angle, scale, attackAnim){
+function drawHealerAt(x, y, angle, scale, attackAnim, alt){
     mctx.save(); mctx.translate(x, y); mctx.scale(scale, scale);
-    mctx.fillStyle="#d8e8f5";
+    const pBody = alt ? "#e8d8f5" : "#d8e8f5";
+    const pRob = alt ? "#d0a8f0" : "#a8d0f0";
+    const pHat = alt ? "#c860e8" : "#e8c860";
+    const pTip = alt ? "#d0a0ff" : "#a0f0ff";
+    mctx.fillStyle=pBody;
     mctx.beginPath(); mctx.moveTo(-16,20); mctx.lineTo(-9,-2); mctx.lineTo(9,-2); mctx.lineTo(16,20); mctx.closePath(); mctx.fill();
     mctx.fillStyle="#ffffff"; mctx.fillRect(-16,18,32,3);
-    mctx.fillStyle="#a8d0f0"; mctx.fillRect(-8,-6,16,8);
+    mctx.fillStyle=pRob; mctx.fillRect(-8,-6,16,8);
     mctx.fillStyle="#f0c8a0"; mctx.fillRect(-8,-24,16,16);
-    mctx.fillStyle="#e8c860"; mctx.fillRect(-10,-28,20,8); mctx.fillRect(-10,-22,4,14); mctx.fillRect(6,-22,4,14);
-    mctx.fillStyle="#f5d878"; mctx.fillRect(-8,-22,16,4);
+    mctx.fillStyle=pHat; mctx.fillRect(-10,-28,20,8); mctx.fillRect(-10,-22,4,14); mctx.fillRect(6,-22,4,14);
+    mctx.fillStyle=pHat; mctx.fillRect(-8,-22,16,4);
     mctx.fillStyle="#101820"; mctx.fillRect(-5,-17,3,3); mctx.fillRect(2,-17,3,3);
     const staffX = Math.cos(angle)*28, staffY = Math.sin(angle)*28;
     mctx.strokeStyle="#a08060"; mctx.lineWidth=4;
     mctx.beginPath(); mctx.moveTo(Math.cos(angle)*6, Math.sin(angle)*6); mctx.lineTo(staffX, staffY); mctx.stroke();
-    mctx.fillStyle="#a0f0ff"; mctx.fillRect(staffX-4, staffY-4, 8, 8);
+    mctx.fillStyle=pTip; mctx.fillRect(staffX-4, staffY-4, 8, 8);
     mctx.fillStyle="#ffffff"; mctx.fillRect(staffX-2, staffY-2, 4, 4);
-    if(attackAnim > 0){ mctx.globalAlpha = 0.5; mctx.fillStyle = "#a0f0ff"; mctx.fillRect(-20, -32, 40, 44); mctx.globalAlpha = 1; }
+    if(attackAnim > 0){ mctx.globalAlpha = 0.5; mctx.fillStyle = pTip; mctx.fillRect(-20, -32, 40, 44); mctx.globalAlpha = 1; }
     mctx.restore();
 }
-function drawKnightAt(x, y, angle, scale, attackAnim){
+function drawKnightAt(x, y, angle, scale, attackAnim, alt){
     mctx.save(); mctx.translate(x, y); mctx.scale(scale, scale);
+    const pHelm = alt ? "#c5aab8" : "#aab8c5";
+    const pBody = alt ? "#9a396f" : "#396f9a";
+    const pTrim = alt ? "#e8d4e0" : "#d4e0e8";
     mctx.fillStyle="#293746"; mctx.fillRect(-16,-8,32,27);
-    mctx.fillStyle="#396f9a"; mctx.fillRect(-13,-6,26,23);
-    mctx.fillStyle="#aab8c5"; mctx.fillRect(-11,-28,22,20);
-    mctx.fillStyle="#d4e0e8"; mctx.fillRect(-8,-24,16,6);
+    mctx.fillStyle=pBody; mctx.fillRect(-13,-6,26,23);
+    mctx.fillStyle=pHelm; mctx.fillRect(-11,-28,22,20);
+    mctx.fillStyle=pTrim; mctx.fillRect(-8,-24,16,6);
     mctx.fillStyle="#202932"; mctx.fillRect(-10,-17,20,5);
-    mctx.fillStyle="#b9c6d0"; mctx.fillRect(-20,-4,10,19);
+    mctx.fillStyle=pHelm; mctx.fillRect(-20,-4,10,19);
     mctx.fillStyle="#526879"; mctx.fillRect(-23,-2,5,15);
     mctx.strokeStyle="#e1e6eb"; mctx.lineWidth=5;
     mctx.beginPath(); mctx.moveTo(8,4); mctx.lineTo(Math.cos(angle)*32, Math.sin(angle)*32); mctx.stroke();
@@ -1132,27 +1068,34 @@ function drawKnightAt(x, y, angle, scale, attackAnim){
     }
     mctx.restore();
 }
-function drawMageAt(x, y, angle, scale, attackAnim){
+function drawMageAt(x, y, angle, scale, attackAnim, alt){
     mctx.save(); mctx.translate(x, y); mctx.scale(scale, scale);
+    const pRobe = alt ? "#459b68" : "#68459b";
+    const pHat = alt ? "#51aa79" : "#7951aa";
+    const pFace = alt ? "#a1ffd4" : "#d4a1ff";
+    const pTip = alt ? "#73ffb8" : "#b873ff";
     mctx.fillStyle="#29233a"; mctx.fillRect(-14,-7,28,27);
-    mctx.fillStyle="#68459b";
+    mctx.fillStyle=pRobe;
     mctx.beginPath(); mctx.moveTo(-18,20); mctx.lineTo(0,-10); mctx.lineTo(18,20); mctx.closePath(); mctx.fill();
-    mctx.fillStyle="#d4a1ff"; mctx.fillRect(-9,-27,18,17);
-    mctx.fillStyle="#7951aa"; mctx.fillRect(-13,-31,26,7);
+    mctx.fillStyle=pFace; mctx.fillRect(-9,-27,18,17);
+    mctx.fillStyle=pHat; mctx.fillRect(-13,-31,26,7);
     mctx.fillStyle="#f0d9ff"; mctx.fillRect(-6,-21,4,4); mctx.fillRect(3,-21,4,4);
-    mctx.strokeStyle="#b873ff"; mctx.lineWidth=4;
+    mctx.strokeStyle=pTip; mctx.lineWidth=4;
     mctx.beginPath(); mctx.moveTo(11,9); mctx.lineTo(Math.cos(angle)*30, Math.sin(angle)*30); mctx.stroke();
-    mctx.fillStyle="#e2bfff"; mctx.fillRect(Math.cos(angle)*30-5, Math.sin(angle)*30-5, 10, 10);
-    if(attackAnim > 0){ mctx.globalAlpha = 0.6; mctx.fillStyle = "#c986ff"; mctx.fillRect(-23, -34, 46, 46); mctx.globalAlpha = 1; }
+    mctx.fillStyle=pFace; mctx.fillRect(Math.cos(angle)*30-5, Math.sin(angle)*30-5, 10, 10);
+    if(attackAnim > 0){ mctx.globalAlpha = 0.6; mctx.fillStyle = pTip; mctx.fillRect(-23, -34, 46, 46); mctx.globalAlpha = 1; }
     mctx.restore();
 }
-function drawArcherAt(x, y, angle, scale, attackAnim){
+function drawArcherAt(x, y, angle, scale, attackAnim, alt){
     mctx.save(); mctx.translate(x, y); mctx.scale(scale, scale);
-    mctx.fillStyle="#263c2b"; mctx.fillRect(-13,-7,26,26);
-    mctx.fillStyle="#4f8a55"; mctx.fillRect(-10,-6,20,22);
+    const pBody = alt ? "#555f8a" : "#4f8a55";
+    const pDark = alt ? "#2b263c" : "#263c2b";
+    const pEye = alt ? "#8a7eff" : "#5eff8a";
+    mctx.fillStyle=pDark; mctx.fillRect(-13,-7,26,26);
+    mctx.fillStyle=pBody; mctx.fillRect(-10,-6,20,22);
     mctx.fillStyle="#d9aa83"; mctx.fillRect(-9,-26,18,18);
     mctx.fillStyle="#69472f"; mctx.fillRect(-11,-30,22,7);
-    mctx.fillStyle="#5eff8a"; mctx.fillRect(-6,-20,4,4); mctx.fillRect(3,-20,4,4);
+    mctx.fillStyle=pEye; mctx.fillRect(-6,-20,4,4); mctx.fillRect(3,-20,4,4);
     mctx.strokeStyle="#d8a34c"; mctx.lineWidth=3;
     const bowX = Math.cos(angle)*25, bowY = Math.sin(angle)*25;
     mctx.beginPath(); mctx.arc(bowX, bowY, 18, angle-Math.PI*0.55, angle+Math.PI*0.55); mctx.stroke();
@@ -1216,10 +1159,10 @@ function drawMenu(){
         mctx.fillStyle = "#0a0608"; mctx.globalAlpha = 0.4;
         mctx.beginPath(); mctx.ellipse(x, actorY + 4, 20 * baseScale, 4 * baseScale, 0, 0, Math.PI*2); mctx.fill();
         mctx.globalAlpha = 1;
-        if(a.role === "healer"){ drawHealerAt(x, y, angle, baseScale, a.attackAnim); }
-        else if(a.role === "knight"){ drawKnightAt(x, y, angle, baseScale, a.attackAnim); }
-        else if(a.role === "mage"){ drawMageAt(x, y, angle, baseScale, a.attackAnim); }
-        else if(a.role === "archer"){ drawArcherAt(x, y, angle, baseScale, a.attackAnim); }
+        if(a.role === "healer"){ drawHealerAt(x, y, angle, baseScale, a.attackAnim, false); }
+        else if(a.role === "knight"){ drawKnightAt(x, y, angle, baseScale, a.attackAnim, false); }
+        else if(a.role === "mage"){ drawMageAt(x, y, angle, baseScale, a.attackAnim, false); }
+        else if(a.role === "archer"){ drawArcherAt(x, y, angle, baseScale, a.attackAnim, false); }
         else if(a.role === "goblin"){ drawEnemyGoblinAt(x, y, baseScale); }
         else if(a.role === "mageEnemy"){ drawEnemyMageAt(x, y, baseScale); }
         else if(a.role === "brute"){ drawBruteAt(x, y, baseScale); }
@@ -1370,8 +1313,8 @@ function drawVictory(){
         vctx.fillStyle = "#0a0608"; vctx.globalAlpha = 0.4;
         vctx.beginPath(); vctx.ellipse(x, groundY + 10, 20 * baseScale, 4 * baseScale, 0, 0, Math.PI*2); vctx.fill();
         vctx.globalAlpha = 1;
-        if(a.role === "healer"){ drawHealerAt(x, y, 0, baseScale, 0); }
-        else if(a.role === "knight"){ drawKnightAt(x, y, 0, baseScale, 0); }
+        if(a.role === "healer"){ drawHealerAt(x, y, 0, baseScale, 0, false); }
+        else if(a.role === "knight"){ drawKnightAt(x, y, 0, baseScale, 0, false); }
     }
     for(const c of victoryState.confetti){
         vctx.save(); vctx.translate(c.x, c.y); vctx.rotate(c.rotation);
@@ -1394,7 +1337,6 @@ function victoryLoop(time){
     drawVictory();
     requestAnimationFrame(victoryLoop);
 }
-
 // =========================================================
 //  GAME CODE
 // =========================================================
@@ -1467,6 +1409,7 @@ let terrainTiles=[];
 let traps=[];
 let floatingTexts=[];
 let bossHitboxes=[];
+let playerHitboxes=[];
 
 let lastTime=0;
 let screenShake=0;
@@ -1478,7 +1421,7 @@ const classes={
     healer:{ name:"HEALER",icon:"✨",hp:95,attack:17,speed:185,cooldown:.45,meleeRange:0,ranged:true,healAmount:18,healCooldown:5 },
     knight:{ name:"KNIGHT",icon:"🛡",hp:145,attack:16,speed:160,cooldown:.42,range:55,type:"melee" },
     mage:{ name:"MAGE",icon:"🔮",hp:80,attack:24,speed:175,cooldown:.55,range:500,type:"ranged" },
-    archer:{ name:"ARCHER",icon:"🏹",hp:90,attack:19,speed:220,cooldown:.45,range:500,type:"ranged" }
+    archer:{ name:"ARCHER",icon:"🏹",hp:90,attack:11119,speed:220,cooldown:.45,range:500,type:"ranged" }
 };
 
 const TERRAIN = {
@@ -1546,6 +1489,11 @@ function createPlayer(color,className){
         poisonTimer:0,poisonTick:0,poisonDamage:0,
         burnTimer:0,burnTick:0,burnDamage:0,
         invulnTimer:0,
+        hasteTimer: 0, hasteBonus: 0, hasteApplied: false, originalBaseCooldown: 0,
+        prevTerrain: null,
+        playerIndex: 1, alternateColors: false,
+        dashTrail: null,
+        knightConeRange: 80, knightConeHalfAngle: 0.55,
         knightShieldBash: 0,
         knightCleave: false,
         knightEarthShatter: false,
@@ -1688,6 +1636,13 @@ function resetPlayer(p,x,y){
     p.poisonTimer=0;p.poisonTick=0;p.poisonDamage=0;
     p.burnTimer=0;p.burnTick=0;p.burnDamage=0;
     p.invulnTimer=0;
+    p.hasteTimer=0; p.hasteBonus=0; p.hasteApplied=false;
+    p.prevTerrain=null;
+    p.dashTrail=null;
+    p.hasteTimer = 0;
+    p.hasteBonus = 0;
+    p.hasteApplied = false;
+    p.originalBaseCooldown = 0;
 }
 
 function validPosition(x,y,r=18){
@@ -1707,6 +1662,18 @@ function getTerrainAt(x,y){
     const idx = ty * cols + tx;
     if(idx < 0 || idx >= terrainTiles.length) return TERRAIN.stone;
     return TERRAIN[terrainTiles[idx].type];
+}
+
+function getPlayerColors(p){
+    const palettes = {
+        healer: { normal: "#d8e8f5", alternate: "#e8d8f5" },
+        knight: { normal: "#396f9a", alternate: "#9a396f" },
+        mage:   { normal: "#68459b", alternate: "#459b68" },
+        archer: { normal: "#4f8a55", alternate: "#555f8a" }
+    };
+    const pal = palettes[p.className];
+    if(!pal) return "#fff";
+    return p.alternateColors ? pal.alternate : pal.normal;
 }
 
 function showDifficultySelect(){
@@ -1770,6 +1737,9 @@ function chooseClass(type){
 function beginSelectedGame(){
     p1=createPlayer("#31a9ff",selectedP1);
     p2=createPlayer("#ff4d69",selectedP2);
+    p1.playerIndex = 1;
+    p2.playerIndex = 2;
+    if(selectedP1 === selectedP2){ p2.alternateColors = true; }
     floor=1;gold=0;currentUpgrades=[];upgradePurchased=false;endlessMode=false;
     for(const u of bossUpgradePool){
         u.applied = false;
@@ -1778,7 +1748,7 @@ function beginSelectedGame(){
     startFloor();
     document.getElementById("classScreen").classList.add("hidden");
     document.getElementById("pauseBtnHud").style.display = "block";
-    document.getElementById("playerHud").classList.remove("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.remove("hidden");
     Sound.sfx.playGame();
     Sound.playDungeonMusic();
     running=true;lastTime=performance.now();
@@ -1787,7 +1757,7 @@ function beginSelectedGame(){
 
 function startFloor(){
     enemies=[];projectiles=[];particles=[];obstacles=[];pickups=[];ambientParticles=[];arcaneBursts=[];
-    terrainTiles=[];traps=[];floatingTexts=[];bossHitboxes=[];bossSavedObstacles=null;
+    terrainTiles=[];traps=[];floatingTexts=[];bossHitboxes=[];playerHitboxes=[];bossSavedObstacles=null;
     dragonArenaActive = false;
     keyFound=false;doorOpen=false;upgradePurchased=false;
     checkProgress.keySpawned = false;
@@ -1944,26 +1914,99 @@ function createTerrain(){
     const tileSize = 42;
     const cols = Math.ceil(room.w / tileSize);
     const rows = Math.ceil(room.h / tileSize);
-    const themes = [];
-    themes.push({type:"stone", weight: 30});
-    themes.push({type:"grass", weight: 20});
-    themes.push({type:"ice", weight: floor >= 2 ? 15 : 0});
-    themes.push({type:"water", weight: floor >= 2 ? 15 : 0});
-    themes.push({type:"lava", weight: floor >= 3 ? 10 : 0});
-    const totalWeight = themes.reduce((s,t)=>s+t.weight, 0);
-    for(let row=0; row<rows; row++){
-        for(let col=0; col<cols; col++){
-            const cx = (col+0.5)*tileSize;
-            const cy = (row+0.5)*tileSize;
-            const distFromP1 = Math.hypot(cx - room.w*.35, cy - room.h*.75);
-            const distFromP2 = Math.hypot(cx - room.w*.65, cy - room.h*.75);
+
+    // Determine terrain combination based on floor
+    let combo;
+    if(floor >= 1 && floor <= 5){
+        // Floors 1-5: Grass + Rock
+        combo = { primary: "grass", secondary: "stone" };
+    } else if(floor >= 6 && floor <= 10){
+        // Floors 6-10: Lava + Rock
+        combo = { primary: "lava", secondary: "stone" };
+    } else if(floor >= 11 && floor <= 15){
+        // Floors 11-15: Ice + Water
+        combo = { primary: "water", secondary: "ice" };
+    } else if(floor >= 16 && floor <= 19){
+        // Floors 16-19: All 4 tiles (stone, grass, ice, water) + lava
+        combo = { primary: "mixed", secondary: "mixed" };
+    } else if(floor === FINAL_FLOOR){
+        // Floor 20: All rock (stone)
+        combo = { primary: "stone", secondary: "stone" };
+    } else {
+        // Endless mode / beyond: mix everything
+        combo = { primary: "mixed", secondary: "mixed" };
+    }
+
+    // Section-based generation so terrain forms natural regions
+    const sectionCols = Math.max(3, Math.floor(cols / 5));
+    const sectionRows = Math.max(3, Math.floor(rows / 4));
+
+    for(let row = 0; row < rows; row++){
+        for(let col = 0; col < cols; col++){
+            const cx = (col + 0.5) * tileSize;
+            const cy = (row + 0.5) * tileSize;
+            const distFromP1 = Math.hypot(cx - room.w * 0.35, cy - room.h * 0.75);
+            const distFromP2 = Math.hypot(cx - room.w * 0.65, cy - room.h * 0.75);
+
             let type = "stone";
-            if(distFromP1 < 90 || distFromP2 < 90){ type = "stone"; }
-            else {
-                let r = Math.random() * totalWeight;
-                for(const t of themes){ r -= t.weight; if(r <= 0){ type = t.type; break; } }
+
+            // Always keep spawn areas safe as stone
+            if(distFromP1 < 100 || distFromP2 < 100){
+                type = "stone";
+            } else {
+                const sc = Math.floor(col / sectionCols);
+                const sr = Math.floor(row / sectionRows);
+                const sectionSeed = (sc * 73856093) ^ (sr * 19349663);
+
+                // Noise-based primary/secondary selection
+                const noise = Math.sin(col * 0.35 + sectionSeed) *
+                              Math.cos(row * 0.35 + sectionSeed * 0.7);
+                const isPrimary = noise > -0.15;
+
+                if(combo.primary === "stone"){
+                    // Floor 20: all stone
+                    type = "stone";
+                }
+                else if(combo.primary === "grass"){
+                    // Floors 1-5: grass + rock
+                    type = isPrimary ? "grass" : "stone";
+                    // Occasionally sprinkle a bit of the secondary
+                    if(Math.random() < 0.08) type = "stone";
+                }
+                else if(combo.primary === "lava"){
+                    // Floors 6-10: lava + rock
+                    type = isPrimary ? "lava" : "stone";
+                    if(Math.random() < 0.08) type = "stone";
+                }
+                else if(combo.primary === "water"){
+                    // Floors 11-15: water + ice
+                    type = isPrimary ? "water" : "ice";
+                    if(Math.random() < 0.10) type = Math.random() < 0.5 ? "water" : "ice";
+                }
+                else {
+                    // Floors 16-19 and Endless: all 4 tiles + lava
+                    // Use noise + seed to create varied regions
+                    const regionChoice = (sectionSeed >>> 0) % 5;
+                    if(regionChoice === 0){
+                        type = isPrimary ? "grass" : "stone";
+                    } else if(regionChoice === 1){
+                        type = isPrimary ? "lava" : "stone";
+                    } else if(regionChoice === 2){
+                        type = isPrimary ? "water" : "ice";
+                    } else if(regionChoice === 3){
+                        type = isPrimary ? "stone" : "grass";
+                    } else {
+                        // Scatter — pick randomly from all
+                        const allTypes = ["stone", "grass", "ice", "water", "lava"];
+                        type = allTypes[Math.floor(Math.random() * allTypes.length)];
+                    }
+                }
             }
-            terrainTiles.push({ col, row, size: tileSize, type, phase: Math.random() * Math.PI * 2 });
+
+            terrainTiles.push({
+                col, row, size: tileSize, type,
+                phase: Math.random() * Math.PI * 2
+            });
         }
     }
 }
@@ -2106,14 +2149,12 @@ function movePlayer(p,c,dt){
     p.hitAnim=Math.max(0,p.hitAnim-dt);
     p.invulnTimer=Math.max(0,p.invulnTimer-dt);
     if(p.className==="healer"){ p.healCooldown=Math.max(0,p.healCooldown-dt); }
-    // Knight momentum decay
     if(p.knightMomentum > 0){
         p.knightMomentumTimer -= dt;
         if(p.knightMomentumTimer <= 0){
             p.knightMomentum = 0;
         }
     }
-    // Blessing decay
     if(p.blessingTimer > 0){
         p.blessingTimer -= dt;
         if(p.blessingTimer <= 0){
@@ -2122,6 +2163,21 @@ function movePlayer(p,c,dt){
                 p.blessingBonus = 0;
             }
         }
+    }
+    if(p.hasteTimer > 0){
+        p.hasteTimer -= dt;
+        if(p.hasteTimer <= 0 && p.hasteApplied){
+            // Restore original cooldown
+            if(p.originalBaseCooldown > 0){
+                p.baseCooldown = p.originalBaseCooldown;
+            }
+            p.hasteBonus = 0;
+            p.hasteApplied = false;
+        }
+    }
+    if(p.dashTrail && p.dashTrail.timer > 0){
+        p.dashTrail.timer -= dt;
+        if(p.dashTrail.timer <= 0) p.dashTrail = null;
     }
     if(p.poisonTimer > 0){
         p.poisonTimer -= dt; p.poisonTick -= dt;
@@ -2163,6 +2219,20 @@ function movePlayer(p,c,dt){
         p.angle=Math.atan2(dy,dx);
         p.walkAnim+=dt*10;
         const terrain = getTerrainAt(p.x, p.y);
+        if(p.prevTerrain !== terrain){
+            if(terrain.type === "water"){
+                for(let i = 0; i < 12; i++){
+                    const angle = Math.random() * Math.PI * 2;
+                    particles.push({
+                        x: p.x, y: p.y + 10,
+                        vx: Math.cos(angle) * (40 + Math.random() * 80),
+                        vy: Math.sin(angle) * (30 + Math.random() * 50) - 30,
+                        life: 0.5, color: "#5cd9ff", size: 3
+                    });
+                }
+            }
+            p.prevTerrain = terrain;
+        }
         let terrainMult = terrain.speedMod;
         if(p.terrainMaster && terrainMult < 1){ terrainMult = 1; }
         const speed = p.speed * terrainMult * speedMult;
@@ -2174,6 +2244,70 @@ function movePlayer(p,c,dt){
     if(keys[c.attack]&&p.cooldown<=0){ attack(p); }
 }
 
+function applyHealing(healer, target, amount){
+    const actualHeal = Math.min(amount, target.maxHp - target.hp);
+    if(actualHeal <= 0) return 0;
+    target.hp += actualHeal;
+    spawnDamageText(target.x, target.y - 50, "+" + Math.round(actualHeal), "#55e884", true);
+    if(healer.healerPurify){
+        target.poisonTimer = 0; target.burnTimer = 0; target.slowTimer = 0;
+    }
+    if(healer.healerChainHeal){
+        const other = (target === p1) ? p2 : p1;
+        if(!other.down && Math.hypot(other.x - healer.x, other.y - healer.y) < 200){
+            const chainHeal = actualHeal * 0.5;
+            const chainActual = Math.min(chainHeal, other.maxHp - other.hp);
+            if(chainActual > 0){
+                other.hp += chainActual;
+                spawnDamageText(other.x, other.y - 50, "+" + Math.round(chainActual), "#55e884", false);
+                burst(other.x, other.y, "#a0f0ff", 10);
+            }
+        }
+    }
+    if(healer.healerHolyNova){
+        spawnPlayerShockwave(target.x, target.y, 20, 100, actualHeal * 0.8);
+    }
+    if(healer.healerBlessing){
+        if(target.blessingTimer <= 0){
+            target.blessingBonus = 0.25;
+            target.attack = target.attack * 1.25;
+        }
+        target.blessingTimer = 5.0;
+    }
+    if(healer.healerSacredFlame){
+        for(let i=0;i<3;i++){
+            particles.push({
+                x: target.x + (Math.random()-0.5)*40,
+                y: target.y + (Math.random()-0.5)*40,
+                vx: 0, vy: -20,
+                life: 0.8, color: "#ff8040", size: 4
+            });
+        }
+    }
+    if(healer.healerDivinePulse){
+        healer.healerPulseCounter = (healer.healerPulseCounter || 0) + 1;
+        if(healer.healerPulseCounter >= 4){
+            healer.healerPulseCounter = 0;
+            p1.hp = Math.min(p1.maxHp, p1.hp + 15);
+            p2.hp = Math.min(p2.maxHp, p2.hp + 15);
+            spawnDamageText(healer.x, healer.y - 60, "DIVINE PULSE!", "#ffd34e", true);
+            burst(healer.x, healer.y, "#a0f0ff", 30);
+            screenShake = 6;
+        }
+    }
+    if(healer.healerDivineAscension){
+        for(const e of [...enemies]){
+            if(Math.hypot(e.x - target.x, e.y - target.y) < 130){
+                e.hp -= actualHeal * 1.5;
+                e.hitAnim = 0.15;
+                spawnDamageText(e.x, e.y - e.radius - 10, Math.round(actualHeal * 1.5), "#ffd34e", false);
+                if(e.hp <= 0){ killEnemy(e, enemies.indexOf(e)); }
+            }
+        }
+    }
+    return actualHeal;
+}
+
 function useSecondaryAbility(p,key){
     if(p.down) return;
     if(p.className==="knight"){
@@ -2183,145 +2317,55 @@ function useSecondaryAbility(p,key){
         return;
     }
     if(!keys[key]) return;
-    if(p.abilityCooldown>0) return;
     if(p.className==="healer"){
-        const ally=(p===p1)?p2:p1;
-        const dist=Math.hypot(ally.x-p.x,ally.y-p.y);
-        if(ally.down||dist>120){ notify("NO ALLY IN RANGE"); return; }
-        let healAmt = p.healPower;
-        ally.hp=Math.min(ally.maxHp,ally.hp+healAmt);
-        spawnDamageText(ally.x, ally.y - 50, "+" + Math.round(healAmt), "#55e884", true);
-        notify("+"+Math.round(healAmt)+" HP HEAL");
-        Sound.sfx.healCast();
-        burst(ally.x,ally.y,"#a0f0ff",18);
-
-        if(p.healerChainHeal){
-            const other = (ally === p1) ? p2 : p1;
-            if(!other.down && Math.hypot(other.x-p.x,other.y-p.y) < 200){
-                other.hp = Math.min(other.maxHp, other.hp + healAmt * 0.5);
-                spawnDamageText(other.x, other.y - 50, "+" + Math.round(healAmt*0.5), "#55e884", false);
-                burst(other.x, other.y, "#a0f0ff", 10);
+        // HASTE — +20% attack speed to self and allies for 5s
+        const allies = [p1, p2];
+        for(const ally of allies){
+            if(ally.down) continue;
+            // Remove existing haste first (prevent stacking)
+            if(ally.hasteApplied && ally.hasteBonus > 0){
+                ally.baseCooldown = ally.baseCooldown / (1 / 1.20);  // undo
+                // simpler: ally.baseCooldown = ally.originalBaseCooldown;
             }
-        }
-        if(p.healerPurify){
-            ally.poisonTimer = 0;
-            ally.burnTimer = 0;
-            ally.slowTimer = 0;
-        }
-        if(p.healerHolyNova){
-            spawnShockwave(ally.x, ally.y, 20, 100, healAmt * 0.8);
-        }
-        if(p.healerBlessing){
-            if(ally.blessingTimer <= 0){
-                ally.blessingBonus = 0.25;
-                ally.attack = ally.attack * 1.25;
+            // Store the pre-haste cooldown ONCE
+            if(!ally.hasteApplied){
+                ally.originalBaseCooldown = ally.baseCooldown;
             }
-            ally.blessingTimer = 5.0;
+            ally.hasteBonus = 0.20;
+            ally.baseCooldown = ally.originalBaseCooldown / 1.20; // 20% faster
+            ally.hasteTimer = 5.0;
+            ally.hasteApplied = true;
+            spawnDamageText(ally.x, ally.y - 55, "HASTE!", "#5cd9ff", true);
+            burst(ally.x, ally.y, "#5cd9ff", 20);
         }
-        if(p.healerSacredFlame){
-            for(let i=0;i<3;i++){
-                particles.push({
-                    x: ally.x + (Math.random()-0.5)*40,
-                    y: ally.y + (Math.random()-0.5)*40,
-                    vx: 0, vy: -20,
-                    life: 0.8, color: "#ff8040", size: 4
-                });
-            }
-        }
-        if(p.healerDivinePulse){
-            p.healerPulseCounter = (p.healerPulseCounter || 0) + 1;
-            if(p.healerPulseCounter >= 4){
-                p.healerPulseCounter = 0;
-                p1.hp = Math.min(p1.maxHp, p1.hp + 15);
-                p2.hp = Math.min(p2.maxHp, p2.hp + 15);
-                spawnDamageText(p.x, p.y - 60, "DIVINE PULSE!", "#ffd34e", true);
-                burst(p.x, p.y, "#a0f0ff", 30);
-                screenShake = 6;
-            }
-        }
-        if(p.healerDivineAscension){
-            for(const e of [...enemies]){
-                if(Math.hypot(e.x - ally.x, e.y - ally.y) < 130){
-                    e.hp -= healAmt * 1.5;
-                    e.hitAnim = 0.15;
-                    spawnDamageText(e.x, e.y - e.radius - 10, Math.round(healAmt * 1.5), "#ffd34e", false);
-                    if(e.hp <= 0){ killEnemy(e, enemies.indexOf(e)); }
-                }
-            }
-        }
-
-        p.abilityCooldown=p.healCooldownMax;
+        Sound.sfx.hasteCast();
+        notify("HASTE!");
+        screenShake = 4;
+        p.abilityCooldown = 10;
     }
     else if(p.className==="mage"){
-        const radius=90;
-        for(let i=enemies.length-1;i>=0;i--){
-            const e=enemies[i];
-            if(e.bossType === "dragon"){
-                const burstR = radius;
-                let hitPart = false;
-                if(e.handLeftState === "stuck" &&
-                   (e.dragonVulnerablePart === "left" || e.dragonVulnerablePart === "both")){
-                    if(Math.hypot(e.handLeftX - p.x, e.handLeftY - p.y) < burstR + 60) hitPart = true;
-                }
-                if(!hitPart && e.handRightState === "stuck" &&
-                   (e.dragonVulnerablePart === "right" || e.dragonVulnerablePart === "both")){
-                    if(Math.hypot(e.handRightX - p.x, e.handRightY - p.y) < burstR + 60) hitPart = true;
-                }
-                if(!hitPart && e.dragonVulnerablePart === "head"){
-                    const headX = room.x + room.w * 0.5;
-                    const headY = room.y + 40;
-                    if(Math.hypot(headX - p.x, headY - p.y) < burstR + 140) hitPart = true;
-                }
-                if(hitPart){
-                    e.hp -= p.attack * 1.5;
-                    e.hitAnim = 0.2;
-                    spawnDamageText(W/2, room.y + 40, Math.round(p.attack * 1.5), "#b85cff", false);
-                    registerDragonPunish(e);
-                }
-                continue;
-            }
-            if(Math.hypot(e.x-p.x,e.y-p.y)<radius+e.radius){
-                e.hp-=p.attack*1.5;
-                e.hitAnim=0.15;
-                if(e.hp<=0){killEnemy(e,i);}
-            }
-        }
-        arcaneBursts.push({ x:p.x, y:p.y, radius:radius, life:0.6, maxLife:0.6 });
-        for(let ring=0; ring<3; ring++){
-            const ringCount = 18;
-            for(let i=0;i<ringCount;i++){
-                const angle = (i/ringCount)*Math.PI*2 + (ring*0.2);
-                const spd = 160 + ring*70;
-                particles.push({
-                    x:p.x, y:p.y,
-                    vx:Math.cos(angle)*spd, vy:Math.sin(angle)*spd,
-                    life:.55 + ring*.1,
-                    color: ring===0?"#ffffff":(ring===1?"#d9a8ff":"#b85cff")
-                });
-            }
-        }
-        for(let i=0;i<24;i++){
-            const angle = (i/24)*Math.PI*2;
-            particles.push({
-                x:p.x, y:p.y,
-                vx:Math.cos(angle)*220, vy:Math.sin(angle)*220,
-                life:0.8, color:"#ffffff", size:3
-            });
-        }
-        // MAGE upgrade: METEOR
-        if(p.mageMeteor){
-            spawnShockwave(p.x + Math.cos(p.angle)*80, p.y + Math.sin(p.angle)*80, 30, 220, p.attack * 2.5);
-            burst(p.x + Math.cos(p.angle)*80, p.y + Math.sin(p.angle)*80, "#ff6020", 40);
-            screenShake = 12;
-        }
-        burst(p.x,p.y,"#e0b0ff",35);
-        Sound.sfx.magicCast();
-        screenShake=9;
-        hitStop = 0.06;
-        p.abilityCooldown=4;
-        notify("ARCANE BURST!");
+        // FIRE BLAST! — fireball projectile with AoE explosion
+        const projSpeed = 520 * p.projectileMultiplier;
+        projectiles.push({
+            x: p.x + Math.cos(p.angle) * 25,
+            y: p.y + Math.sin(p.angle) * 25,
+            vx: Math.cos(p.angle) * projSpeed,
+            vy: Math.sin(p.angle) * projSpeed,
+            damage: p.attack * 1.5,
+            baseDamage: p.attack * 1.5,
+            life: 1.2, owner: p,
+            projectileType: "fireblast",
+            radius: 12, isFireBlast: true, explosionRadius: 90,
+            hits: new Set()
+        });
+        Sound.sfx.fireBlast();
+        burst(p.x + Math.cos(p.angle)*25, p.y + Math.sin(p.angle)*25, "#ff6020", 15);
+        screenShake = 4;
+        p.abilityCooldown = 10;
+        notify("FIRE BLAST!");
     }
     else if(p.className==="archer"){
+        const startX = p.x, startY = p.y;
         const rollDist=90;
         const nx=p.x+Math.cos(p.angle)*rollDist;
         const ny=p.y+Math.sin(p.angle)*rollDist;
@@ -2329,6 +2373,16 @@ function useSecondaryAbility(p,key){
         else{
             if(validPosition(nx,p.y,p.radius)){p.x=nx;}
             else if(validPosition(p.x,ny,p.radius)){p.y=ny;}
+        }
+        // Motion trail
+        p.dashTrail = { positions: [], timer: 0.35 };
+        for(let i = 0; i < 8; i++){
+            const t = i / 8;
+            p.dashTrail.positions.push({
+                x: startX + (p.x - startX) * t,
+                y: startY + (p.y - startY) * t,
+                alpha: 1 - t * 0.8
+            });
         }
         Sound.sfx.dash();
         burst(p.x,p.y,"#ffd36b",16);
@@ -2366,6 +2420,9 @@ function meleeAttack(p){
         shieldBonus = true;
         knockbackForce = 260;
     }
+    const isKnight = p.className === "knight";
+    const coneRange = isKnight ? p.range * 1.6 : p.range;
+    const coneHalf = isKnight ? (p.knightConeHalfAngle || 0.55) : 0.9;
     for(let i=enemies.length-1;i>=0;i--){
         const e=enemies[i];
         const dx=e.x-p.x;
@@ -2376,12 +2433,12 @@ function meleeAttack(p){
             let hitPart = null;
             let partX = 0, partY = 0;
             if(e.handLeftState === "stuck" &&
-               (e.dragonVulnerablePart === "left" || e.dragonVulnerablePart === "both")){
+            (e.dragonVulnerablePart === "left" || e.dragonVulnerablePart === "both")){
                 const d = Math.hypot(e.handLeftX - p.x, e.handLeftY - p.y);
                 if(d < 120){ hitPart = "left"; partX = e.handLeftX; partY = e.handLeftY; }
             }
             if(!hitPart && e.handRightState === "stuck" &&
-               (e.dragonVulnerablePart === "right" || e.dragonVulnerablePart === "both")){
+            (e.dragonVulnerablePart === "right" || e.dragonVulnerablePart === "both")){
                 const d = Math.hypot(e.handRightX - p.x, e.handRightY - p.y);
                 if(d < 120){ hitPart = "right"; partX = e.handRightX; partY = e.handRightY; }
             }
@@ -2408,7 +2465,7 @@ function meleeAttack(p){
             continue;
         }
 
-        if(distance<=p.range+e.radius&&Math.abs(normalizeAngle(Math.atan2(dy,dx)-p.angle))<.9){
+        if(distance<=coneRange+e.radius&&Math.abs(normalizeAngle(Math.atan2(dy,dx)-p.angle))<coneHalf){
             let damage=getAttackDamage(p);
             if(shieldBonus) damage *= 1.3;
             if(p.knightCounterReady){
@@ -2445,10 +2502,10 @@ function meleeAttack(p){
                 }
             }
             if(p.knightEarthShatter){
-                spawnShockwave(p.x, p.y, 20, 90, damage * 0.5);
+                spawnPlayerShockwave(p.x, p.y, 20, 90, damage * 0.5);
             }
             if(p.knightTitansWrath){
-                spawnShockwave(p.x, p.y, 30, 160, damage * 0.8);
+                spawnPlayerShockwave(p.x, p.y, 30, 160, damage * 0.8);
                 screenShake = 10;
             }
             if(p.knightMomentum !== undefined){
@@ -2497,18 +2554,26 @@ function rangedAttack(p){
         p.mageNovaCounter = (p.mageNovaCounter || 0) + 1;
         if(p.mageNovaCounter >= 6){
             p.mageNovaCounter = 0;
-            spawnShockwave(p.x, p.y, 20, 140, damage * 0.8);
+            spawnPlayerShockwave(p.x, p.y, 20, 140, damage * 0.8);
             burst(p.x, p.y, "#b85cff", 25);
             screenShake = 8;
         }
     }
 
     const spawnProjectile = (x, y, angle, dmg, ricochetLeft, splitDepth) => {
+        const baseDmg = dmg;
+        const isCrit = Math.random() < p.criticalChance;
+        const finalDmg = isCrit ? baseDmg * p.criticalMultiplier : baseDmg;
         projectiles.push({
             x, y,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed,
-            damage: dmg, critical, life: 1.5, owner: p,
+            damage: finalDmg,
+            baseDamage: baseDmg,
+            critical: isCrit,
+            critMultiplier: p.criticalMultiplier,
+            critChance: p.criticalChance,
+            life: 1.5, owner: p,
             projectileType: projType,
             healPower: p.className === "healer" ? p.healPower : 0,
             piercing: (p.className === "mage" && p.magePiercing) || (p.className === "healer" && p.healerPiercing) || (p.className === "archer" && p.archerPiercing),
@@ -2701,7 +2766,6 @@ function damagePlayer(p,damage,source){
         notify(p===p1?"PLAYER 1 IS DOWN":"PLAYER 2 IS DOWN");
     }
 }
-
 // =========================================================
 //  ENEMY / BOSS AI
 // =========================================================
@@ -3023,13 +3087,123 @@ function executeBossAttack(e, target){
             screenShake = a === "tyrantRush" ? 12 : 10; Sound.sfx.bossAppear(); break;
         }
         case "bonequake": {
-            spawnShockwave(e.x, e.y, 40, 200, e.damage * 0.9);
-            spawnShockwave(e.x, e.y, 200, 360, e.damage * 0.9);
-            spawnShockwave(e.x, e.y, 360, 520, e.damage * 0.9);
-            screenShake = 14; Sound.sfx.bossAppear(); e.stateTimer = 1.2; break;
+            // Three escalating stomps with 1s delay each
+            const stompRadii = [240, 460, 600];
+            const stompDamages = [1.5, 2.0, 2.5];
+            for(let i = 0; i < 3; i++){
+                const bx = e.x, by = e.y;
+                const radius = stompRadii[i];
+                const dmgMult = stompDamages[i];
+                // Warning zone
+                bossHitboxes.push({
+                    kind: "stompWarning",
+                    x: bx, y: by, radius: radius,
+                    life: 1.0, maxLife: 1.0,
+                    hitSet: new Set()
+                });
+                setTimeout(() => {
+                    if(!enemies.includes(e)) return;
+                    // Damage players in radius
+                    for(const p of [p1, p2]){
+                        if(p.down || p.invulnTimer > 0) continue;
+                        if(Math.hypot(p.x - bx, p.y - by) < radius){
+                            damagePlayer(p, e.damage * dmgMult, "enemy");
+                            knockback(p, bx, by, 200 + i * 100);
+                        }
+                    }
+                    // Visual stomp
+                    bossHitboxes.push({
+                        kind: "stomp",
+                        x: bx, y: by, radius: radius,
+                        damage: 0,
+                        life: 0.5, maxLife: 0.5,
+                        hitSet: new Set()
+                    });
+                    screenShake = 8 + i * 4;
+                    Sound.sfx.bossAppear();
+                    for(let j = 0; j < 15 + i * 10; j++){
+                        const angle = Math.random() * Math.PI * 2;
+                        const dist = Math.random() * radius;
+                        particles.push({
+                            x: bx + Math.cos(angle) * dist,
+                            y: by + Math.sin(angle) * dist,
+                            vx: Math.cos(angle) * (100 + Math.random() * 200),
+                            vy: Math.sin(angle) * (100 + Math.random() * 200) - 100,
+                            life: 0.6 + Math.random() * 0.4,
+                            color: Math.random() < 0.5 ? "#c8c0a8" : "#8a8070",
+                            size: 3 + Math.random() * 4
+                        });
+                    }
+                }, (i + 1) * 1000);
+            }
+            e.stateTimer = 3.8;
+            break;
         }
         case "boneSweep": spawnConeHit(e.x, e.y, e.attackLockAngle, 150, 1.6, e.damage * 1.2); screenShake = 8; Sound.sfx.swordSwing(); e.stateTimer = 0.6; break;
-        case "impaleLine": spawnLineHit(e.x, e.y, e.attackLockAngle, 700, 60, e.damage * 1.3); screenShake = 10; Sound.sfx.shieldBreak(); e.stateTimer = 0.7; break;
+        case "impaleLine": {
+            // ===== IMPALE LINE — INSTANT RUSHING ROCK BARRAGE =====
+            // Damage is instant (hitbox check), so the animation must be near-instant too.
+            spawnLineHit(e.x, e.y, e.attackLockAngle, 1400, 60, e.damage * 1.3);
+
+            const hb = bossHitboxes[bossHitboxes.length - 1];
+            if(hb && hb.kind === "line"){
+                hb.isRockThrow = true;
+
+                hb.rockDirX = Math.cos(e.attackLockAngle);
+                hb.rockDirY = Math.sin(e.attackLockAngle);
+
+                // BLITZ SPEED — crosses 1400px in ~0.35s to match the instant hit
+                hb.rockSpeed = 4000;
+
+                hb.rockOriginX = e.x;
+                hb.rockOriginY = e.y;
+
+                hb.rockCount = 10;
+                hb.rocks = [];
+                for(let i = 0; i < hb.rockCount; i++){
+                    const side = (Math.random() - 0.5) * hb.width;
+                    const perpX = -hb.rockDirY;
+                    const perpY =  hb.rockDirX;
+                    hb.rocks.push({
+                        startX: hb.rockOriginX + perpX * side,
+                        startY: hb.rockOriginY + perpY * side,
+                        side,
+                        size: 12 + Math.random() * 10,
+                        spin: (Math.random() - 0.5) * 10,
+                        rotation: Math.random() * Math.PI * 2,
+                        // Near-zero stagger — they appear together as one barrage
+                        startDelay: i * 0.012,
+                        traveled: 0
+                    });
+                }
+
+                // Short lifetime — matches the blitz crossing time (~0.35s) + impact linger
+                hb.life = 0.55;
+                hb.maxLife = 0.55;
+            }
+
+            // Impact dust at the END of the line — fires almost immediately
+            setTimeout(() => {
+                const endX = e.x + Math.cos(e.attackLockAngle) * 1400;
+                const endY = e.y + Math.sin(e.attackLockAngle) * 1400;
+                for(let i = 0; i < 40; i++){
+                    particles.push({
+                        x: endX + (Math.random() - 0.5) * 60,
+                        y: endY + (Math.random() - 0.5) * 60,
+                        vx: (Math.random() - 0.5) * 140,
+                        vy: -40 - Math.random() * 80,
+                        life: 0.5 + Math.random() * 0.3,
+                        color: Math.random() < 0.6 ? "#6a6050" : "#3a3228",
+                        size: 3 + Math.random() * 4
+                    });
+                }
+            }, 350);
+
+            screenShake = 10;
+            Sound.sfx.shieldBreak();
+            e.stateTimer = 0.55;
+            break;
+        }
         case "shadowBeam": spawnLaser(e.x, e.y, e.attackLockAngle, 1400, 26, e.damage * 1.2, 0.85, 0); Sound.sfx.magicCast(); screenShake = 6; e.stateTimer = 0.9; break;
         case "sweepBeam": spawnLaser(e.x, e.y, e.attackLockAngle, 1400, 24, e.damage * 1.0, 1.8, Math.PI); Sound.sfx.magicCast(); screenShake = 6; e.stateTimer = 1.9; break;
         case "crossfire": {
@@ -3069,7 +3243,7 @@ function updateBossAttack(e, target, dt){
         const nx = e.x + e.chargeDir.x * speed * dt;
         const ny = e.y + e.chargeDir.y * speed * dt;
         if(nx > room.x + e.radius && nx < room.x + room.w - e.radius &&
-           ny > room.y + e.radius && ny < room.y + room.h - e.radius){
+        ny > room.y + e.radius && ny < room.y + room.h - e.radius){
             e.x = nx; e.y = ny;
         } else {
             e.charging = false;
@@ -3125,7 +3299,7 @@ function updateBossRecovery(e, target, dt){
 }
 
 // =========================================================
-//  ANCIENT DRAGON — Tower Set-Piece
+//  ANCIENT DRAGON
 // =========================================================
 function updateDragon(e, dt){
     e.stateTimer -= dt;
@@ -3836,12 +4010,51 @@ function spawnCircleHit(x, y, radius, damage, delay){
     });
 }
 
+function spawnPlayerShockwave(x, y, innerR, outerR, damage){
+    playerHitboxes.push({
+        kind: "shock", x, y, innerR, outerR,
+        damage, life: 0.5, maxLife: 0.5,
+        hitSet: new Set()
+    });
+}
+
+function updatePlayerHitboxes(dt){
+    for(let i = playerHitboxes.length - 1; i >= 0; i--){
+        const hb = playerHitboxes[i];
+        hb.life -= dt;
+        const progress = 1 - hb.life / hb.maxLife;
+        const currentRadius = hb.innerR + (hb.outerR - hb.innerR) * progress;
+        for(let j = enemies.length - 1; j >= 0; j--){
+            const e = enemies[j];
+            if(e.bossType === "dragon"){
+                continue;
+            }
+            const d = Math.hypot(e.x - hb.x, e.y - hb.y);
+            if(d >= hb.innerR && d <= currentRadius && !hb.hitSet.has(e)){
+                hb.hitSet.add(e);
+                e.hp -= hb.damage;
+                e.hitAnim = 0.15;
+                spawnDamageText(e.x, e.y - e.radius - 10, Math.round(hb.damage), "#fff", false);
+                comboCount++;
+                comboTimer = 3.0;
+                burst(e.x, e.y, "#fff", 6);
+                if(e.hp <= 0){ killEnemy(e, j); }
+            }
+        }
+        if(hb.life <= 0) playerHitboxes.splice(i, 1);
+    }
+}
+
 function updateBossHitboxes(dt){
     for(let i = bossHitboxes.length-1; i >= 0; i--){
         const hb = bossHitboxes[i];
         hb.life -= dt;
         if(hb.hitCooldownTimer > 0) hb.hitCooldownTimer -= dt;
         if(hb.rotSpeed){ hb.angle += hb.rotSpeed * dt; }
+        if(hb.kind === "stompWarning" || hb.kind === "stomp"){
+            if(hb.life <= 0) bossHitboxes.splice(i, 1);
+            continue;
+        }
         for(const p of [p1, p2]){
             if(p.down || p.invulnTimer > 0) continue;
             let hit = false;
@@ -3859,8 +4072,10 @@ function updateBossHitboxes(dt){
                     break;
                 }
                 case "shock": {
+                    const progress = 1 - hb.life / hb.maxLife;
+                    const currentRadius = hb.innerR + (hb.outerR - hb.innerR) * progress;
                     const d = Math.hypot(p.x - hb.x, p.y - hb.y);
-                    if(d >= hb.innerR && d <= hb.outerR) hit = true;
+                    if(d >= hb.innerR && d <= currentRadius) hit = true;
                     break;
                 }
                 case "cone": {
@@ -3914,6 +4129,41 @@ function drawBossHitboxes(){
     for(const hb of bossHitboxes){
         const tRatio = 1 - (hb.life / hb.maxLife);
         switch(hb.kind){
+            case "stompWarning": {
+                ctx.save();
+                const pulse = 0.5 + 0.5 * Math.sin(now * 0.02);
+                ctx.globalAlpha = 0.25 + pulse * 0.25;
+                ctx.fillStyle = "#ff4020";
+                ctx.beginPath(); ctx.arc(hb.x, hb.y, hb.radius, 0, Math.PI * 2); ctx.fill();
+                ctx.globalAlpha = 0.7 + pulse * 0.3;
+                ctx.strokeStyle = "#ffd34e"; ctx.lineWidth = 4;
+                ctx.beginPath(); ctx.arc(hb.x, hb.y, hb.radius, 0, Math.PI * 2); ctx.stroke();
+                ctx.globalAlpha = 0.5;
+                ctx.strokeStyle = "#ff2020"; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(hb.x, hb.y, hb.radius * (0.4 + pulse * 0.4), 0, Math.PI * 2); ctx.stroke();
+                ctx.restore();
+                break;
+            }
+            case "stomp": {
+                ctx.save();
+                const progress = 1 - (hb.life / hb.maxLife);
+                const alpha = hb.life / hb.maxLife;
+                ctx.globalAlpha = alpha * 0.6;
+                ctx.fillStyle = "rgba(200, 192, 168, 0.3)";
+                ctx.beginPath(); ctx.arc(hb.x, hb.y, hb.radius, 0, Math.PI * 2); ctx.fill();
+                ctx.strokeStyle = "#c8c0a8"; ctx.lineWidth = 4;
+                ctx.beginPath(); ctx.arc(hb.x, hb.y, hb.radius * (0.8 + progress * 0.2), 0, Math.PI * 2); ctx.stroke();
+                ctx.strokeStyle = "rgba(200, 192, 168, 0.6)"; ctx.lineWidth = 2;
+                for(let i = 0; i < 6; i++){
+                    const a = (i / 6) * Math.PI * 2 + progress * 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(hb.x + Math.cos(a) * hb.radius * 0.3, hb.y + Math.sin(a) * hb.radius * 0.3);
+                    ctx.lineTo(hb.x + Math.cos(a) * hb.radius * 0.9, hb.y + Math.sin(a) * hb.radius * 0.9);
+                    ctx.stroke();
+                }
+                ctx.restore();
+                break;
+            }
             case "circle": {
                 ctx.save();
                 if(hb.delay > 0){
@@ -3969,12 +4219,117 @@ function drawBossHitboxes(){
                 break;
             }
             case "line": {
-                ctx.save();
-                ctx.translate(hb.x, hb.y); ctx.rotate(hb.angle);
-                ctx.globalAlpha = 0.4 * (hb.life / hb.maxLife);
-                ctx.fillStyle = "#ff2020";
-                ctx.fillRect(0, -hb.width / 2, hb.length, hb.width);
-                ctx.restore();
+                if(hb.isRockThrow){
+                    // ===== INSTANT RUSHING ROCK BARRAGE VISUAL =====
+                    const elapsed = hb.maxLife - hb.life;
+
+                    const dirX = hb.rockDirX;
+                    const dirY = hb.rockDirY;
+                    const speed = hb.rockSpeed;
+                    const maxTravel = hb.length;    
+
+                    for(let i = 0; i < (hb.rocks ? hb.rocks.length : 0); i++){
+                        const r = hb.rocks[i];
+
+                        const t = elapsed - r.startDelay;
+                        if(t < 0) continue;
+
+                        const dist = Math.min(maxTravel, speed * t);
+
+                        const x = r.startX + dirX * dist;
+                        const y = r.startY + dirY * dist;
+
+                        const rot = r.rotation + r.spin * t;
+
+                        // --- Motion trail — capped so it doesn't stretch absurdly at 4000px/s ---
+                        const trailDist = Math.min(dist, 140);
+                        if(trailDist > 2){
+                            const tx = x - dirX * trailDist;
+                            const ty = y - dirY * trailDist;
+                            ctx.globalAlpha = 0.6;
+                            ctx.fillStyle = "#beaa82";
+                            ctx.save();
+                            ctx.translate(tx, ty);
+                            ctx.rotate(Math.atan2(dirY, dirX));
+                            ctx.fillRect(0, -r.size * 0.4, trailDist, r.size * 0.8);
+                            ctx.restore();
+                        }
+
+                        // --- Ground shadow ---
+                        ctx.globalAlpha = 0.3;
+                        ctx.fillStyle = "#000";
+                        ctx.beginPath();
+                        ctx.ellipse(x, y + r.size * 0.35, r.size * 0.95, r.size * 0.4, 0, 0, Math.PI*2);
+                        ctx.fill();
+
+                        // --- Rock body ---
+                        ctx.globalAlpha = 1;
+                        ctx.save();
+                        ctx.translate(x, y);
+                        ctx.rotate(rot);
+
+                        ctx.fillStyle = "#5a5248";
+                        ctx.beginPath();
+                        ctx.moveTo(-r.size*0.5, 0);
+                        ctx.lineTo(-r.size*0.3, -r.size*0.55);
+                        ctx.lineTo( r.size*0.35, -r.size*0.5);
+                        ctx.lineTo( r.size*0.55,  r.size*0.1);
+                        ctx.lineTo( r.size*0.2,   r.size*0.6);
+                        ctx.lineTo(-r.size*0.45,  r.size*0.5);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        ctx.fillStyle = "#8a7c68";
+                        ctx.beginPath();
+                        ctx.moveTo(-r.size*0.3, -r.size*0.5);
+                        ctx.lineTo( r.size*0.3, -r.size*0.45);
+                        ctx.lineTo( r.size*0.1, -r.size*0.1);
+                        ctx.lineTo(-r.size*0.2, -r.size*0.15);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        ctx.strokeStyle = "#2a241c";
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.moveTo(-r.size*0.1, -r.size*0.4);
+                        ctx.lineTo( r.size*0.05,  r.size*0.1);
+                        ctx.lineTo(-r.size*0.15,  r.size*0.4);
+                        ctx.stroke();
+                        ctx.restore();
+
+                        // --- Impact crater once the rock reaches the end (NO FADE) ---
+                        if(dist >= maxTravel - 2){
+                            ctx.globalAlpha = 0.7;
+                            ctx.fillStyle = "#3a3228";
+                            ctx.beginPath();
+                            ctx.arc(x, y, r.size * 0.95, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.globalAlpha = 0.85;
+                            ctx.fillStyle = "#6a6050";
+                            ctx.fillRect(x - r.size * 0.6, y - 2, 4, 4);
+                            ctx.fillRect(x + r.size * 0.4, y + 1, 3, 3);
+                        }
+                    }
+
+                    // Faint danger tint along the corridor (constant, no fade)
+                    ctx.globalAlpha = 0.10;
+                    ctx.fillStyle = "#ff4020";
+                    ctx.save();
+                    ctx.translate(hb.x, hb.y);
+                    ctx.rotate(hb.angle);
+                    ctx.fillRect(0, -hb.width / 2, hb.length, hb.width);
+                    ctx.restore();
+
+                    ctx.globalAlpha = 1;
+                } else {
+                    // ===== DEFAULT LINE VISUAL (unchanged) =====
+                    ctx.save();
+                    ctx.translate(hb.x, hb.y); ctx.rotate(hb.angle);
+                    ctx.globalAlpha = 0.4 * (hb.life / hb.maxLife);
+                    ctx.fillStyle = "#ff2020";
+                    ctx.fillRect(0, -hb.width / 2, hb.length, hb.width);
+                    ctx.restore();
+                }
                 break;
             }
             case "laser": {
@@ -3991,6 +4346,24 @@ function drawBossHitboxes(){
                 ctx.restore();
                 break;
             }
+        }
+    }
+}
+
+function drawPlayerHitboxes(){
+    const now = performance.now();
+    for(const hb of playerHitboxes){
+        const tRatio = 1 - (hb.life / hb.maxLife);
+        if(hb.kind === "shock"){
+            const r = hb.innerR + (hb.outerR - hb.innerR) * tRatio;
+            ctx.save();
+            ctx.globalAlpha = 0.5 * (hb.life / hb.maxLife);
+            ctx.strokeStyle = "#a0f0ff"; ctx.lineWidth = 5;
+            ctx.beginPath(); ctx.arc(hb.x, hb.y, r, 0, Math.PI*2); ctx.stroke();
+            ctx.globalAlpha = 0.25 * (hb.life / hb.maxLife);
+            ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(hb.x, hb.y, r, 0, Math.PI*2); ctx.stroke();
+            ctx.restore();
         }
     }
 }
@@ -4020,7 +4393,7 @@ function drawBossTelegraph(e){
             ctx.globalAlpha = 0.25 + pulse * 0.25;
             ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, 170, -0.7, 0.7); ctx.closePath(); ctx.fill();
         }
-        else if(["groundSmash","bonequake"].includes(name)){
+        else if(["groundSmash"].includes(name)){
             ctx.strokeStyle = "#ff2020"; ctx.lineWidth = 4;
             ctx.globalAlpha = 0.5 + pulse * 0.4;
             ctx.beginPath(); ctx.arc(e.x, e.y, 180 + pulse * 20, 0, Math.PI*2); ctx.stroke();
@@ -4059,9 +4432,9 @@ function drawBossTelegraph(e){
         case "handSlamR": {
             const isLeft = name === "handSlamL";
             const cx = isLeft ? (e.lockedLeftTargetX || room.x + room.w * 0.25)
-                              : (e.lockedRightTargetX || room.x + room.w * 0.75);
+                            : (e.lockedRightTargetX || room.x + room.w * 0.75);
             const cy = isLeft ? (e.lockedLeftTargetY || room.y + room.h * 0.5)
-                              : (e.lockedRightTargetY || room.y + room.h * 0.5);
+                            : (e.lockedRightTargetY || room.y + room.h * 0.5);
             ctx.fillStyle = "#ff2020";
             ctx.globalAlpha = 0.25 + pulse * 0.3;
             ctx.beginPath(); ctx.arc(cx, cy, 180, 0, Math.PI*2); ctx.fill();
@@ -4199,6 +4572,58 @@ function updateProjectiles(dt){
         b.life-=dt;
         let remove=false;
 
+        if(b.projectileType === "fireblast"){
+            let hit = false;
+            let impactX = b.x, impactY = b.y;
+            for(let j = enemies.length - 1; j >= 0; j--){
+                const e = enemies[j];
+                if(e.bossType === "dragon") continue;
+                if(Math.hypot(e.x - b.x, e.y - b.y) < e.radius + b.radius){
+                    hit = true; impactX = b.x; impactY = b.y; break;
+                }
+            }
+            for(const o of obstacles){
+                if(b.x > o.x && b.x < o.x + o.w && b.y > o.y && b.y < o.y + o.h){ hit = true; break; }
+            }
+            if(b.x < room.x || b.x > room.x + room.w || b.y < room.y || b.y > room.y + room.h) hit = true;
+            if(b.life <= 0) hit = true;
+            if(hit){
+                const explRadius = b.explosionRadius || 90;
+                for(let j = enemies.length - 1; j >= 0; j--){
+                    const e = enemies[j];
+                    if(e.bossType === "dragon") continue;
+                    const d = Math.hypot(e.x - impactX, e.y - impactY);
+                    if(d < explRadius + e.radius){
+                        e.hp -= b.damage;
+                        e.hitAnim = 0.15;
+                        spawnDamageText(e.x, e.y - e.radius - 10, Math.round(b.damage), "#ff6020", false);
+                        if(e.hp <= 0) killEnemy(e, j);
+                    }
+                }
+                for(let ring = 0; ring < 3; ring++){
+                    for(let k = 0; k < 20; k++){
+                        const angle = (k / 20) * Math.PI * 2;
+                        const spd = 200 + ring * 100;
+                        particles.push({
+                            x: impactX, y: impactY,
+                            vx: Math.cos(angle) * spd,
+                            vy: Math.sin(angle) * spd,
+                            life: 0.5 + ring * 0.15,
+                            color: ring === 0 ? "#ffd34e" : (ring === 1 ? "#ff8040" : "#ff4020"),
+                            size: 4 + ring
+                        });
+                    }
+                }
+                arcaneBursts.push({ x: impactX, y: impactY, radius: explRadius, life: 0.5, maxLife: 0.5 });
+                Sound.sfx.magicCast();
+                screenShake = 8;
+                hitStop = 0.05;
+                projectiles.splice(i, 1);
+                continue;
+            }
+            continue;
+        }
+
         if(b.projectileType === "dragonFireball" || b.projectileType === "dragonFireballBig"){
             for(const p of [p1, p2]){
                 if(p.down || p.invulnTimer > 0) continue;
@@ -4239,11 +4664,9 @@ function updateProjectiles(dt){
             if(b.projectileType==="healer"&&b.owner){
                 for(const p of [p1,p2]){
                     if(!p.down&&p!==b.owner&&Math.hypot(p.x-b.x,p.y-b.y)<p.radius+10){
-                        const healAmt=b.healPower||18;
-                        p.hp=Math.min(p.maxHp,p.hp+healAmt);
+                        applyHealing(b.owner, p, b.healPower || 18);
                         Sound.sfx.healPickup();
                         burst(p.x,p.y,"#a0f0ff",10);
-                        notify("+"+Math.round(healAmt)+" HP (HEAL)");
                         remove=true;
                         break;
                     }
@@ -4256,13 +4679,13 @@ function updateProjectiles(dt){
                         let hitPart = null;
                         let partX = 0, partY = 0;
                         if(e.handLeftState === "stuck" &&
-                           (e.dragonVulnerablePart === "left" || e.dragonVulnerablePart === "both")){
+                        (e.dragonVulnerablePart === "left" || e.dragonVulnerablePart === "both")){
                             if(Math.hypot(e.handLeftX - b.x, e.handLeftY - b.y) < 120){
                                 hitPart = "left"; partX = e.handLeftX; partY = e.handLeftY;
                             }
                         }
                         if(!hitPart && e.handRightState === "stuck" &&
-                           (e.dragonVulnerablePart === "right" || e.dragonVulnerablePart === "both")){
+                        (e.dragonVulnerablePart === "right" || e.dragonVulnerablePart === "both")){
                             if(Math.hypot(e.handRightX - b.x, e.handRightY - b.y) < 120){
                                 hitPart = "right"; partX = e.handRightX; partY = e.handRightY;
                             }
@@ -4290,7 +4713,16 @@ function updateProjectiles(dt){
                         if(b.hits && b.hits.has(e)) continue;
                         if(b.hits) b.hits.add(e);
 
-                        e.hp-=b.damage;
+                        let finalDamage = b.damage;
+                        if(b.owner && b.owner.archerMarked){
+                            const marks = b.owner.markedEnemies || new Map();
+                            const existingStacks = marks.get(e) || 0;
+                            if(existingStacks >= 3){
+                                finalDamage *= 1.5;
+                            }
+                        }
+
+                        e.hp-=finalDamage;
                         e.hitAnim=.12;
 
                         if(b.burning){
@@ -4306,21 +4738,20 @@ function updateProjectiles(dt){
                             e.poisonDamage = b.damage * 0.15;
                         }
                         if(b.explosive || (b.projectileType === "mage" && b.owner && b.owner.mageArcaneSplit)){
-                            spawnShockwave(e.x, e.y, 10, 70, b.damage * 0.6);
+                            spawnPlayerShockwave(e.x, e.y, 10, 70, b.damage * 0.6);
                         }
                         if(b.owner && b.owner.archerMarked){
                             const marks = b.owner.markedEnemies || new Map();
                             const stacks = (marks.get(e) || 0) + 1;
                             marks.set(e, stacks);
                             b.owner.markedEnemies = marks;
-                            if(stacks >= 3){
-                                e.hp -= b.damage * 0.5;
-                                spawnDamageText(e.x, e.y - e.radius - 25, "MARKED!", "#ffd34e", false);
+                            if(stacks === 3){
+                                spawnDamageText(e.x, e.y - e.radius - 25, "MARKED!", "#ffd34e", true);
                             }
                         }
 
                         knockbackEnemy(e, b.x, b.y, 60);
-                        spawnDamageText(e.x, e.y - e.radius - 10, (b.critical?"CRIT ":"") + Math.round(b.damage), b.critical?"#ffd34e":"#fff", b.critical);
+                        spawnDamageText(e.x, e.y - e.radius - 10, (b.critical?"CRIT ":"") + Math.round(finalDamage), b.critical?"#ffd34e":"#fff", b.critical);
                         comboCount++;
                         comboTimer = 3.0;
                         if(b.critical){ Sound.sfx.hitCrit(); hitStop = 0.08; } else { Sound.sfx.hitEnemy(); }
@@ -4344,6 +4775,9 @@ function updateProjectiles(dt){
                                     b.vx = Math.cos(angle) * speed;
                                     b.vy = Math.sin(angle) * speed;
                                     b.ricochetLeft = bouncesLeft - 1;
+                                    const newCrit = Math.random() < (b.critChance || 0);
+                                    b.critical = newCrit;
+                                    b.damage = newCrit ? (b.baseDamage || b.damage) * (b.critMultiplier || 2) : (b.baseDamage || b.damage);
                                     break;
                                 }
                             }
@@ -4356,11 +4790,14 @@ function updateProjectiles(dt){
                                         vx: Math.cos(splitAngle) * speed,
                                         vy: Math.sin(splitAngle) * speed,
                                         damage: b.damage * 0.5,
+                                        baseDamage: b.damage * 0.5,
                                         critical: false, life: 0.9, owner: b.owner,
                                         projectileType: "mage",
                                         piercing: false,
                                         ricochetLeft: 0,
                                         splitDepth: 1,
+                                        critChance: b.critChance || 0,
+                                        critMultiplier: b.critMultiplier || 2,
                                         hits: new Set()
                                     });
                                 }
@@ -4432,11 +4869,25 @@ function updateTerrainDamage(dt){
             const resist = p.fireResist || 0;
             const dmg = terrain.damage * dt * (1-resist);
             p.hp -= dmg;
+            // Lava burning visuals
+            if(Math.random() < 0.5){
+                particles.push({
+                    x: p.x + (Math.random()-0.5)*25,
+                    y: p.y + (Math.random()-0.5)*25,
+                    vx: (Math.random()-0.5)*40,
+                    vy: -50 - Math.random()*80,
+                    life: 0.5,
+                    color: Math.random() < 0.5 ? "#ff6020" : "#ffd34e"
+                });
+            }
             if(Math.random() < 0.3){
                 particles.push({
-                    x: p.x + (Math.random()-0.5)*20, y: p.y + (Math.random()-0.5)*20,
-                    vx: (Math.random()-0.5)*30, vy: -30 - Math.random()*40,
-                    life: 0.4, color: "#ff6020"
+                    x: p.x, y: p.y + 15,
+                    vx: (Math.random()-0.5)*20,
+                    vy: -30 - Math.random()*30,
+                    life: 0.4,
+                    color: "#ff4020",
+                    size: 5
                 });
             }
             if(p.hp <= 0){
@@ -4545,7 +4996,7 @@ function triggerVictory(){
     Sound.stopMusic();
     document.getElementById("objective").classList.add("hidden");
     document.getElementById("toast").classList.add("hidden");
-    document.getElementById("playerHud").classList.add("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.add("hidden");
     startVictoryAnimation();
 }
 
@@ -4593,7 +5044,7 @@ function openUpgrade(){
     renderUpgrades();
     document.getElementById("nextFloor").textContent = (floor === FINAL_FLOOR && !endlessMode) ? "FINISH" : "ENTER NEXT FLOOR";
     document.getElementById("upgradeScreen").classList.remove("hidden");
-    document.getElementById("playerHud").classList.add("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.add("hidden");
 }
 
 function buyUpgrade(index){
@@ -4725,7 +5176,7 @@ function openBossUpgrade(){
     }
     renderBossUpgrades();
     document.getElementById("bossUpgradeScreen").classList.remove("hidden");
-    document.getElementById("playerHud").classList.add("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.add("hidden");
 }
 function buyBossUpgrade(index){
     const upgrade = currentBossUpgrades[index];
@@ -4750,7 +5201,7 @@ function buyBossUpgrade(index){
         });
     }
     document.getElementById("bossUpgradeScreen").classList.add("hidden");
-    document.getElementById("playerHud").classList.remove("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.remove("hidden");
     running = true;
     lastTime = performance.now();
     requestAnimationFrame(loop);
@@ -4906,7 +5357,6 @@ function deathBurst(x, y, color){
     });
 }
 
-
 function updateBossBar(){
     const bar = document.getElementById("bossBar");
     if(!bar) return;
@@ -4968,9 +5418,9 @@ function updateHUD(){
 
     updateBossBar();
     updateTopInfo();
-    updatePlayerHUD();   // <-- ADD THIS
+    updatePlayerHUD();
 }
-// ===== Player HUD rendering =====
+
 function updatePlayerHUD(){
     if(!running) return;
     updatePlayerPanel(p1, 1);
@@ -4999,12 +5449,8 @@ function updatePlayerPanel(p, num){
     hpBar.style.width = (hpRatio * 100) + "%";
     hpText.textContent = Math.ceil(p.hp) + "/" + Math.ceil(p.maxHp);
 
-    let hpColor;
-    if(p.className === "healer")      hpColor = "linear-gradient(#2e9e4a,#1e7a30)";
-    else if(p.className === "knight") hpColor = "linear-gradient(#d7354e,#a02030)";
-    else if(p.className === "mage")   hpColor = "linear-gradient(#9d5cff,#7030c0)";
-    else                              hpColor = "linear-gradient(#2c9fe4,#1a70b0)";
-    hpBar.style.background = hpColor;
+    // ALL CHARACTERS USE GREEN HEALTH BAR
+    hpBar.style.background = "linear-gradient(#2e9e4a,#1e7a30)";
 
     nameEl.textContent = "P" + num + " · " + classes[p.className].name;
     iconEl.textContent = classes[p.className].icon;
@@ -5015,7 +5461,6 @@ function updatePlayerPanel(p, num){
         reviveRing.style.animationDuration = (1.8 / Math.max(0.1, p.reviveTimer)) + "s";
     }
 
-    // Knight shield bar
     if(p.className === "knight" && !p.shieldBroken && p.shieldHealth > 0){
         shieldOuter.style.display = "block";
         shieldBar.style.width = (p.shieldHealth / p.shieldMaxHealth * 100) + "%";
@@ -5023,16 +5468,15 @@ function updatePlayerPanel(p, num){
         shieldOuter.style.display = "none";
     }
 
-    // Status pips
     let pipsHTML = "";
     if(p.poisonTimer > 0)     pipsHTML += '<div class="statusPip pip-poison" title="Poison">☠</div>';
     if(p.burnTimer > 0)       pipsHTML += '<div class="statusPip pip-burn" title="Burn">🔥</div>';
     if(p.slowTimer > 0)       pipsHTML += '<div class="statusPip pip-slow" title="Slow">❄</div>';
     if(p.blessingTimer > 0)   pipsHTML += '<div class="statusPip pip-bless" title="Blessing">✦</div>';
+    if(p.hasteTimer > 0)      pipsHTML += '<div class="statusPip pip-haste" title="Haste">⚡</div>';
     if(p.knightCounterReady)  pipsHTML += '<div class="statusPip pip-counter" title="Counter Ready">⚡</div>';
     statusPips.innerHTML = pipsHTML;
 
-    // Ability icons
     let a1Icon = "👊";
     if(p.className === "knight")      a1Icon = "⚔";
     else if(p.className === "mage")   a1Icon = "🔮";
@@ -5041,30 +5485,18 @@ function updatePlayerPanel(p, num){
     abilityIcon.textContent = a1Icon;
 
     let a2Icon = "✦";
-    if(p.className === "healer")      a2Icon = "💚";
+    if(p.className === "healer")      a2Icon = "⚡";
     else if(p.className === "knight") a2Icon = "🛡";
-    else if(p.className === "mage")   a2Icon = "💥";
+    else if(p.className === "mage")   a2Icon = "🔥";
     else if(p.className === "archer") a2Icon = "➤";
     ability2Icon.textContent = a2Icon;
 
-    // Cooldown display on ability 2 (secondary ability)
     if(p.className === "knight"){
         if(p.shieldBroken){
             ability2.classList.add("onCooldown");
             ability2.classList.remove("ready");
             cooldownText.classList.remove("hidden");
             cooldownText.textContent = Math.ceil(p.shieldCooldown);
-        } else {
-            ability2.classList.remove("onCooldown");
-            ability2.classList.add("ready");
-            cooldownText.classList.add("hidden");
-        }
-    } else if(p.className === "healer"){
-        if(p.healCooldown > 0){
-            ability2.classList.add("onCooldown");
-            ability2.classList.remove("ready");
-            cooldownText.classList.remove("hidden");
-            cooldownText.textContent = Math.ceil(p.healCooldown);
         } else {
             ability2.classList.remove("onCooldown");
             ability2.classList.add("ready");
@@ -5081,7 +5513,6 @@ function updatePlayerPanel(p, num){
         cooldownText.classList.add("hidden");
     }
 
-    // Attack button always ready when cooldown is low
     if(p.cooldown > 0.15){
         ability1.classList.add("onCooldown");
         ability1.classList.remove("ready");
@@ -5090,6 +5521,7 @@ function updatePlayerPanel(p, num){
         ability1.classList.add("ready");
     }
 }
+
 function drawDungeon(){
     if(dragonArenaActive){ drawDragonRooftop(); return; }
     ctx.fillStyle="#07060a";
@@ -5395,14 +5827,57 @@ function drawTerrain(){
         let baseColor = data.colors[alt];
         if(tile.type === "water"){
             const wave = Math.sin(time*2 + tile.phase) * 0.5 + 0.5;
-            ctx.globalAlpha = 1; ctx.fillStyle = baseColor; ctx.fillRect(tx, ty, tile.size, tile.size);
-            ctx.fillStyle = "#2a5a82"; ctx.globalAlpha = 0.3 + wave * 0.3;
-            ctx.fillRect(tx, ty + tile.size*0.3, tile.size, tile.size*0.3); ctx.globalAlpha = 1;
+            // Blue water base
+            ctx.fillStyle = "#1e3a5c"; ctx.fillRect(tx, ty, tile.size, tile.size);
+            ctx.fillStyle = "#2a5a82"; ctx.globalAlpha = 0.4 + wave * 0.4;
+            ctx.fillRect(tx, ty + tile.size*0.3, tile.size, tile.size*0.35);
+            ctx.globalAlpha = 0.7;
+            ctx.fillStyle = "#4a8ab8";
+            ctx.fillRect(tx + tile.size*0.2, ty + tile.size*0.5 + wave*3, tile.size*0.3, 2);
+            ctx.fillRect(tx + tile.size*0.6, ty + tile.size*0.3 + (1-wave)*3, tile.size*0.25, 2);
+            ctx.globalAlpha = 1;
         } else if(tile.type === "lava"){
-            const glow = Math.sin(time*3 + tile.phase) * 0.5 + 0.5;
-            ctx.fillStyle = baseColor; ctx.fillRect(tx, ty, tile.size, tile.size);
-            ctx.fillStyle = "#ff6020"; ctx.globalAlpha = 0.3 + glow * 0.5;
-            ctx.fillRect(tx + tile.size*0.3, ty + tile.size*0.4, tile.size*0.4, tile.size*0.2); ctx.globalAlpha = 1;
+            // OBVIOUS LAVA — dark rock base with molten cracks and glowing center
+            const glow = Math.sin(time*4 + tile.phase) * 0.5 + 0.5;
+            const bubble = Math.sin(time*6 + tile.phase * 2) * 0.5 + 0.5;
+            // Dark rock base
+            ctx.fillStyle = "#1a0a08"; 
+            ctx.fillRect(tx, ty, tile.size, tile.size);
+            // Molten cracks
+            ctx.fillStyle = "#4a1008";
+            ctx.fillRect(tx + 5, ty + 5, tile.size - 10, tile.size - 10);
+            // Glowing lava
+            ctx.fillStyle = "#8a2010";
+            ctx.globalAlpha = 0.8 + glow * 0.2;
+            ctx.fillRect(tx + 8, ty + 8, tile.size - 16, tile.size - 16);
+            // Bright cracks
+            ctx.globalAlpha = 0.6 + glow * 0.4;
+            ctx.fillStyle = "#ff6020";
+            ctx.fillRect(tx + 12, ty + 5, 4, tile.size - 10);
+            ctx.fillRect(tx + tile.size - 16, ty + 8, 4, tile.size - 16);
+            ctx.fillRect(tx + 5, ty + 12, tile.size - 10, 4);
+            // Bright center
+            ctx.globalAlpha = 0.4 + bubble * 0.6;
+            ctx.fillStyle = "#ffd34e";
+            ctx.fillRect(tx + tile.size*0.35, ty + tile.size*0.4, tile.size*0.3, tile.size*0.2);
+            // Bubble
+            ctx.globalAlpha = bubble;
+            ctx.fillStyle = "#fff0a0";
+            ctx.beginPath();
+            ctx.arc(tx + tile.size*0.5, ty + tile.size*0.5, 3 + bubble * 2, 0, Math.PI*2);
+            ctx.fill();
+            // Dark border
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = "#0a0404";
+            ctx.fillRect(tx, ty, tile.size, 3);
+            ctx.fillRect(tx, ty, 3, tile.size);
+            ctx.fillRect(tx + tile.size - 3, ty, 3, tile.size);
+            ctx.fillRect(tx, ty + tile.size - 3, tile.size, 3);
+            // Glow
+            ctx.globalAlpha = 0.15 + glow * 0.15;
+            ctx.fillStyle = "#ff6020";
+            ctx.fillRect(tx - 5, ty - 5, tile.size + 10, tile.size + 10);
+            ctx.globalAlpha = 1;
         } else if(tile.type === "grass"){
             ctx.fillStyle = baseColor; ctx.fillRect(tx, ty, tile.size, tile.size);
             ctx.fillStyle = "#3a6b3d";
@@ -5411,6 +5886,10 @@ function drawTerrain(){
             ctx.fillStyle = baseColor; ctx.fillRect(tx, ty, tile.size, tile.size);
             ctx.fillStyle = "#7fb8d8"; ctx.globalAlpha = 0.4;
             ctx.fillRect(tx + 4, ty + 4, tile.size - 8, 2); ctx.globalAlpha = 1;
+            // Frozen edge
+            ctx.fillStyle = "#b8e0ff"; ctx.globalAlpha = 0.3;
+            ctx.fillRect(tx, ty, tile.size, 1);
+            ctx.globalAlpha = 1;
         } else {
             ctx.fillStyle = baseColor; ctx.fillRect(tx, ty, tile.size, tile.size);
         }
@@ -5704,6 +6183,24 @@ function drawBrute(e,y){
 }
 
 function drawProjectile(b){
+    if(b.projectileType === "fireblast"){
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        const r = 12;
+        ctx.globalAlpha = 0.5;
+        const gg = ctx.createRadialGradient(0, 0, r*0.3, 0, 0, r*2.5);
+        gg.addColorStop(0, "#ffd34e");
+        gg.addColorStop(0.5, "#ff6020");
+        gg.addColorStop(1, "rgba(255, 40, 20, 0)");
+        ctx.fillStyle = gg;
+        ctx.beginPath(); ctx.arc(0, 0, r*2.5, 0, Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = "#ff6020"; ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = "#ffd34e"; ctx.beginPath(); ctx.arc(0, 0, r*0.6, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = "#fff0c0"; ctx.beginPath(); ctx.arc(-r*0.2, -r*0.2, r*0.3, 0, Math.PI*2); ctx.fill();
+        ctx.restore();
+        return;
+    }
     if(b.projectileType === "dragonFireball" || b.projectileType === "dragonFireballBig"){
         ctx.save();
         ctx.translate(b.x, b.y);
@@ -5757,24 +6254,26 @@ function drawProjectile(b){
 }
 
 function drawHealer(p,x,y){
-    ctx.fillStyle="#d8e8f5";
+    const colors = getPlayerColors(p);
+    const alt = p.alternateColors;
+    ctx.fillStyle= alt ? "#e8d8f5" : "#d8e8f5";
     ctx.beginPath();
     ctx.moveTo(x-16,y+20); ctx.lineTo(x-9,y-2); ctx.lineTo(x+9,y-2); ctx.lineTo(x+16,y+20);
     ctx.closePath(); ctx.fill();
     ctx.fillStyle="#ffffff"; ctx.fillRect(x-16,y+18,32,3);
-    ctx.fillStyle="#a8d0f0"; ctx.fillRect(x-8,y-6,16,8);
+    ctx.fillStyle= alt ? "#d0a8f0" : "#a8d0f0"; ctx.fillRect(x-8,y-6,16,8);
     ctx.fillStyle="#f0c8a0"; ctx.fillRect(x-8,y-24,16,16);
-    ctx.fillStyle="#e8c860"; ctx.fillRect(x-10,y-28,20,8); ctx.fillRect(x-10,y-22,4,14); ctx.fillRect(x+6,y-22,4,14);
-    ctx.fillStyle="#f5d878"; ctx.fillRect(x-8,y-22,16,4);
+    ctx.fillStyle= alt ? "#c860e8" : "#e8c860"; ctx.fillRect(x-10,y-28,20,8); ctx.fillRect(x-10,y-22,4,14); ctx.fillRect(x+6,y-22,4,14);
+    ctx.fillStyle= alt ? "#c860e8" : "#f5d878"; ctx.fillRect(x-8,y-22,16,4);
     ctx.fillStyle="#101820"; ctx.fillRect(x-5,y-17,3,3); ctx.fillRect(x+2,y-17,3,3);
     const staffX=x+Math.cos(p.angle)*28;
     const staffY=y+Math.sin(p.angle)*28;
     ctx.strokeStyle="#a08060"; ctx.lineWidth=4;
     ctx.beginPath(); ctx.moveTo(x+Math.cos(p.angle)*6,y+Math.sin(p.angle)*6); ctx.lineTo(staffX,staffY); ctx.stroke();
-    ctx.fillStyle="#a0f0ff"; ctx.fillRect(staffX-4,staffY-4,8,8);
+    ctx.fillStyle= alt ? "#d0a0ff" : "#a0f0ff"; ctx.fillRect(staffX-4,staffY-4,8,8);
     ctx.fillStyle="#ffffff"; ctx.fillRect(staffX-2,staffY-2,4,4);
     if(p.attackAnim>0){
-        ctx.globalAlpha=0.5; ctx.fillStyle="#a0f0ff";
+        ctx.globalAlpha=0.5; ctx.fillStyle= alt ? "#d0a0ff" : "#a0f0ff";
         ctx.fillRect(x-20,y-32,40,44); ctx.globalAlpha=1;
     }
 }
@@ -5786,6 +6285,17 @@ function drawPlayer(p){
     const bob=moving?Math.sin(p.walkAnim)*2:Math.sin(performance.now()*.004+p.x);
     const x=p.x;
     const y=p.y+bob;
+    // Archer dash trail
+    if(p.dashTrail && p.dashTrail.timer > 0){
+        for(const pos of p.dashTrail.positions){
+            ctx.globalAlpha = pos.alpha * 0.4 * (p.dashTrail.timer / 0.35);
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, p.radius * 0.8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+    }
     if(p.className==="healer"){drawHealer(p,x,y);}
     else if(p.className==="knight"){drawKnight(p,x,y);}
     else if(p.className==="mage"){drawPlayerMage(p,x,y);}
@@ -5803,12 +6313,8 @@ function drawPlayer(p){
 
     ctx.fillStyle = "#08070b"; ctx.fillRect(barX - 2, barY - 2, barW + 4, barH + 4);
     ctx.fillStyle = "#2a1f2e"; ctx.fillRect(barX, barY, barW, barH);
-    let hpColor;
-    if(p.className === "healer")      hpColor = "#2e9e4a";
-    else if(p.className === "knight") hpColor = "#d7354e";
-    else if(p.className === "mage")   hpColor = "#9d5cff";
-    else                              hpColor = "#2c9fe4";
-    ctx.fillStyle = hpColor;
+    // ALL CHARACTERS USE GREEN HEALTH BAR
+    ctx.fillStyle = "#2e9e4a";
     ctx.fillRect(barX, barY, barW * hpRatio, barH);
     ctx.fillStyle = "rgba(255,255,255,0.25)";
     ctx.fillRect(barX, barY, barW * hpRatio, 2);
@@ -5817,7 +6323,7 @@ function drawPlayer(p){
 
     if(hpRatio < 0.3 && p.hp > 0){
         const pulse = 0.5 + 0.5 * Math.sin(performance.now() * 0.012);
-        ctx.strokeStyle = `rgba(255,64,64,${0.4 + pulse * 0.6})`;
+        ctx.strokeStyle = `rgba(46,158,74,${0.4 + pulse * 0.6})`;
         ctx.lineWidth = 2;
         ctx.strokeRect(barX - 1.5, barY - 1.5, barW + 3, barH + 3);
     }
@@ -5829,6 +6335,7 @@ function drawPlayer(p){
     if(p.poisonTimer > 0){ ctx.fillStyle="#6fdc5c"; ctx.fillRect(x-20, y+50, 8, 6); }
     if(p.burnTimer > 0){ ctx.fillStyle="#ff6020"; ctx.fillRect(x-10, y+50, 8, 6); }
     if(p.slowTimer > 0){ ctx.fillStyle="#5cd9ff"; ctx.fillRect(x+0, y+50, 8, 6); }
+    if(p.hasteTimer > 0){ ctx.fillStyle="#5cd9ff"; ctx.fillRect(x+10, y+50, 8, 6); }
 
     if(p.className==="knight"){
         if(p.shieldBroken){
@@ -5849,12 +6356,13 @@ function drawPlayer(p){
 }
 
 function drawKnight(p,x,y){
+    const alt = p.alternateColors;
     ctx.fillStyle="#293746"; ctx.fillRect(x-16,y-8,32,27);
-    ctx.fillStyle="#396f9a"; ctx.fillRect(x-13,y-6,26,23);
-    ctx.fillStyle="#aab8c5"; ctx.fillRect(x-11,y-28,22,20);
-    ctx.fillStyle="#d4e0e8"; ctx.fillRect(x-8,y-24,16,6);
+    ctx.fillStyle= alt ? "#9a396f" : "#396f9a"; ctx.fillRect(x-13,y-6,26,23);
+    ctx.fillStyle= alt ? "#c5aab8" : "#aab8c5"; ctx.fillRect(x-11,y-28,22,20);
+    ctx.fillStyle= alt ? "#e8d4e0" : "#d4e0e8"; ctx.fillRect(x-8,y-24,16,6);
     ctx.fillStyle="#202932"; ctx.fillRect(x-10,y-17,20,5);
-    ctx.fillStyle="#b9c6d0"; ctx.fillRect(x-20,y-4,10,19);
+    ctx.fillStyle= alt ? "#c5aab8" : "#b9c6d0"; ctx.fillRect(x-20,y-4,10,19);
     ctx.fillStyle="#526879"; ctx.fillRect(x-23,y-2,5,15);
     ctx.strokeStyle="#e1e6eb"; ctx.lineWidth=5;
     ctx.beginPath();
@@ -5862,18 +6370,40 @@ function drawKnight(p,x,y){
     ctx.lineTo(x+Math.cos(p.angle)*32,y+Math.sin(p.angle)*32);
     ctx.stroke();
     if(p.attackAnim>0){
+        // FORWARD-FACING CONE VISUAL
         const t = p.attackAnim / 0.18;
-        const alpha = t * 0.9;
+        const alpha = t * 0.7;
+        const coneRange = p.range * 1.6;
+        const coneHalf = p.knightConeHalfAngle || 0.55;
         ctx.globalAlpha = alpha;
-        ctx.strokeStyle = "#08070b"; ctx.lineWidth = 8;
-        ctx.beginPath(); ctx.arc(x, y, 39, p.angle - 0.75, p.angle + 0.75); ctx.stroke();
-        ctx.strokeStyle = "#ff2020"; ctx.lineWidth = 5;
-        ctx.beginPath(); ctx.arc(x, y, 39, p.angle - 0.75, p.angle + 0.75); ctx.stroke();
-        ctx.strokeStyle = "#ff8040"; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.arc(x, y, 39, p.angle - 0.7, p.angle + 0.7); ctx.stroke();
+        // Dark outline
+        ctx.fillStyle = "#08070b";
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.arc(x, y, coneRange + 3, p.angle - coneHalf - 0.05, p.angle + coneHalf + 0.05);
+        ctx.closePath(); ctx.fill();
+        // Red cone
+        ctx.fillStyle = "rgba(255, 32, 32, 0.4)";
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.arc(x, y, coneRange, p.angle - coneHalf, p.angle + coneHalf);
+        ctx.closePath(); ctx.fill();
+        // Orange inner cone
+        ctx.fillStyle = "rgba(255, 128, 64, 0.5)";
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.arc(x, y, coneRange * 0.7, p.angle - coneHalf * 0.8, p.angle + coneHalf * 0.8);
+        ctx.closePath(); ctx.fill();
+        // Bright edge
+        ctx.strokeStyle = "#ffd34e";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.arc(x, y, coneRange, p.angle - coneHalf, p.angle + coneHalf);
+        ctx.closePath();
+        ctx.stroke();
         ctx.globalAlpha = 1;
     }
-    // Counter ready indicator
     if(p.knightCounterReady){
         const pulse = 0.6 + 0.4 * Math.sin(performance.now()*0.02);
         ctx.globalAlpha = pulse;
@@ -5935,24 +6465,26 @@ function drawKnightShield(p, x, y){
 }
 
 function drawPlayerMage(p,x,y){
+    const alt = p.alternateColors;
     ctx.fillStyle="#29233a"; ctx.fillRect(x-14,y-7,28,27);
-    ctx.fillStyle="#68459b";
+    ctx.fillStyle= alt ? "#459b68" : "#68459b";
     ctx.beginPath(); ctx.moveTo(x-18,y+20); ctx.lineTo(x,y-10); ctx.lineTo(x+18,y+20); ctx.closePath(); ctx.fill();
-    ctx.fillStyle="#d4a1ff"; ctx.fillRect(x-9,y-27,18,17);
-    ctx.fillStyle="#7951aa"; ctx.fillRect(x-13,y-31,26,7);
+    ctx.fillStyle= alt ? "#a1ffd4" : "#d4a1ff"; ctx.fillRect(x-9,y-27,18,17);
+    ctx.fillStyle= alt ? "#51aa79" : "#7951aa"; ctx.fillRect(x-13,y-31,26,7);
     ctx.fillStyle="#f0d9ff"; ctx.fillRect(x-6,y-21,4,4); ctx.fillRect(x+3,y-21,4,4);
-    ctx.strokeStyle="#b873ff"; ctx.lineWidth=4;
+    ctx.strokeStyle= alt ? "#73ffb8" : "#b873ff"; ctx.lineWidth=4;
     ctx.beginPath(); ctx.moveTo(x+11,y+9); ctx.lineTo(x+Math.cos(p.angle)*30,y+Math.sin(p.angle)*30); ctx.stroke();
-    ctx.fillStyle="#e2bfff"; ctx.fillRect(x+Math.cos(p.angle)*30-5,y+Math.sin(p.angle)*30-5,10,10);
-    if(p.attackAnim>0){ ctx.globalAlpha=.6; ctx.fillStyle="#c986ff"; ctx.fillRect(x-23,y-34,46,46); ctx.globalAlpha=1; }
+    ctx.fillStyle= alt ? "#a1ffd4" : "#e2bfff"; ctx.fillRect(x+Math.cos(p.angle)*30-5,y+Math.sin(p.angle)*30-5,10,10);
+    if(p.attackAnim>0){ ctx.globalAlpha=.6; ctx.fillStyle= alt ? "#73ffb8" : "#c986ff"; ctx.fillRect(x-23,y-34,46,46); ctx.globalAlpha=1; }
 }
 
 function drawArcher(p,x,y){
-    ctx.fillStyle="#263c2b"; ctx.fillRect(x-13,y-7,26,26);
-    ctx.fillStyle="#4f8a55"; ctx.fillRect(x-10,y-6,20,22);
+    const alt = p.alternateColors;
+    ctx.fillStyle= alt ? "#2b263c" : "#263c2b"; ctx.fillRect(x-13,y-7,26,26);
+    ctx.fillStyle= alt ? "#555f8a" : "#4f8a55"; ctx.fillRect(x-10,y-6,20,22);
     ctx.fillStyle="#d9aa83"; ctx.fillRect(x-9,y-26,18,18);
     ctx.fillStyle="#69472f"; ctx.fillRect(x-11,y-30,22,7);
-    ctx.fillStyle="#5eff8a"; ctx.fillRect(x-6,y-20,4,4); ctx.fillRect(x+3,y-20,4,4);
+    ctx.fillStyle= alt ? "#8a7eff" : "#5eff8a"; ctx.fillRect(x-6,y-20,4,4); ctx.fillRect(x+3,y-20,4,4);
     ctx.strokeStyle="#d8a34c"; ctx.lineWidth=3;
     const bowX=x+Math.cos(p.angle)*25;
     const bowY=y+Math.sin(p.angle)*25;
@@ -6081,6 +6613,7 @@ function draw(){
     for(const b of projectiles){drawProjectile(b);}
     drawArcaneBursts();
     drawBossHitboxes();
+    drawPlayerHitboxes();
     drawPlayer(p1);
     drawPlayer(p2);
     drawCoopIndicators();
@@ -6094,7 +6627,7 @@ function gameOver(){
         running=false;
         Sound.sfx.gameOver();
         Sound.stopMusic();
-        document.getElementById("playerHud").classList.add("hidden");  // ← ADD
+        document.getElementById("playerHud").classList.add("hidden");
         const startScreen=document.getElementById("startScreen");
         const panel=startScreen.querySelector(".panel");
         panel.querySelector("h1").textContent="DUNGEON FALLEN";
@@ -6116,6 +6649,7 @@ function update(dt){
     handleRevive(p2,p1,"h",dt);
     updateEnemies(dt);
     updateBossHitboxes(dt);
+    updatePlayerHitboxes(dt);
     updateProjectiles(dt);
     updateTraps(dt);
     updateTerrainDamage(dt);
@@ -6218,7 +6752,7 @@ document.querySelectorAll(".bossUpgradeCard").forEach(card => {
 document.getElementById("nextFloor").addEventListener("click",()=>{
     floor++;
     document.getElementById("upgradeScreen").classList.add("hidden");
-    document.getElementById("playerHud").classList.remove("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.remove("hidden");
     startFloor();
     Sound.sfx.levelUp();
     running=true;
@@ -6232,7 +6766,7 @@ document.getElementById("endlessButton").addEventListener("click", () => {
     document.getElementById("victoryScreen").classList.add("hidden");
     document.getElementById("objective").classList.remove("hidden");
     document.getElementById("toast").classList.remove("hidden");
-    document.getElementById("playerHud").classList.remove("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.remove("hidden");
     floor++;
     startFloor();
     Sound.playDungeonMusic();
@@ -6248,7 +6782,7 @@ document.getElementById("returnButton").addEventListener("click", () => {
     document.getElementById("mainMenu").classList.remove("hidden");
     document.getElementById("objective").classList.add("hidden");
     document.getElementById("toast").classList.add("hidden");
-    document.getElementById("playerHud").classList.add("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.add("hidden");
     menuRunning = true;
     menuLastTime = performance.now();
     requestAnimationFrame(menuLoop);
@@ -6270,7 +6804,7 @@ document.getElementById("quitBtn").addEventListener("click", () => {
     document.getElementById("mainMenu").classList.remove("hidden");
     document.getElementById("objective").classList.add("hidden");
     document.getElementById("toast").classList.add("hidden");
-    document.getElementById("playerHud").classList.add("hidden");  // ← ADD
+    document.getElementById("playerHud").classList.add("hidden");
     Sound.stopMusic();
     Sound.playMenuMusic();
     menuRunning = true;
